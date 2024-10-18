@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StyledWrapper } from "@/style/styled-wrapper";
+import "@/style/global.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
