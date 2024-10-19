@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { StyledWrapper } from "@/style/styled-wrapper";
 import "@/style/global.css";
+import Providers from "@/utils/provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledWrapper> {children}</StyledWrapper>
+        <StyledWrapper>
+          <Providers>{children}</Providers>
+        </StyledWrapper>
       </body>
     </html>
   );
