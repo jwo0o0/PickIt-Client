@@ -11,8 +11,8 @@ export const useSignup = () => {
     mutationFn: async ({ userData }) => {
       const userResponse = await signUpAPI(
         userData.email,
-        userData.password,
         userData.nickname,
+        userData.password,
         userData.bio
       );
       if (userData.profileImage) {
