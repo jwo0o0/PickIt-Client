@@ -1,7 +1,0 @@
-## 🎯 Issue
-- Resolves #
-
-## 📝 Description
-- 
-
-## 💬 Etc
