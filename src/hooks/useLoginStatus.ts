@@ -3,7 +3,7 @@ import { useAuthStore } from "@/store/auth/useAuthStore";
 
 export const useLoginStatus = () => {
   const [isLogin, setIsLogin] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const logout = useAuthStore((state) => state.logout);
 

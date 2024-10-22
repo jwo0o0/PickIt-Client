@@ -1,29 +1,20 @@
 "use client";
-import styled from "styled-components";
-import { MainContent } from "./MainContent";
-import { SideNavbar } from "./SideNavbar";
-import { LoginButton } from "./LoginButton";
 import { useLoginStatus } from "@/hooks/useLoginStatus";
+
+import { MainContent } from "./MainContent";
+import { SideNavbar } from "./Navbar/SideNavbar";
+import { LoginButton } from "@/components/layout/LoginButton";
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 export const MainLayout = ({ children }: MainLayoutProps) => {
-  const { isLogin } = useLoginStatus();
+  const { isLogin, isLoading } = useLoginStatus();
   return (
-    <MainLayoutContainer>
-      {!isLogin && <LoginButton />}
+    <div className="w-screen h-screen bg-gray-100 flex justify-center">
+      {!isLoading && !isLogin && <LoginButton />}
       <MainContent>{children}</MainContent>
       <SideNavbar />
-    </MainLayoutContainer>
+    </div>
   );
 };
-
-const MainLayoutContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.gray[100]};
-
-  display: flex;
-  justify-content: center;
-`;

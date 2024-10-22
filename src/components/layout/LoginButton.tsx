@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const LoginButton = () => {
   return (
-    <Button className="fixed top-4 right-4">
+    <Button className="fixed top-4 right-4 bg-gray-900">
       <Link href="/login">로그인</Link>
     </Button>
   );

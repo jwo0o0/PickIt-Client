@@ -9,7 +9,14 @@ export default function LoginPage() {
   const { mutate: loginMutation } = useLogin();
 
   const handleLogin = () => {
-    loginMutation({ email, password });
+    loginMutation(
+      { email, password },
+      {
+        onError: (error) => {
+          console.log(error.message);
+        },
+      }
+    );
   };
 
   return (
