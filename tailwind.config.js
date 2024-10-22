@@ -58,7 +58,7 @@ module.exports = {
           5: "hsl(var(--chart-5))",
         },
       },
-      text: {
+      fontSize: {
         display1: ["56px", { lineHeight: "72px", letterSpacing: "-0.0319em" }],
         display2: ["40px", { lineHeight: "52px", letterSpacing: "-0.0282em" }],
         title1: ["36px", { lineHeight: "48px", letterSpacing: "-0.027em" }],
@@ -98,5 +98,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
 };
