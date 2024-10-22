@@ -1,4 +1,5 @@
 import { DefaultTheme } from "styled-components/dist/types";
+import { media } from "./media";
 
 const colors = {
   gray: {
@@ -122,6 +123,7 @@ export type TextTypes = typeof texts;
 const theme: DefaultTheme = {
   colors,
   texts,
+  media,
 };
 
 export default theme;

@@ -1,15 +1,14 @@
 import { css, Interpolation } from "styled-components";
 
 /*
-  small: 0px ~ 600px
-  medium: 601px ~ 1119px
+  small: 0px ~ 768px
+  medium: 769px ~ 1119px
   large: 1200px ~
  */
 const sizes: { [key: string]: number } = {
-  desktop: 1281,
-  laptop: 801,
-  tablet: 501,
-  mobile: 0,
+  large: 1200,
+  medium: 769,
+  small: 0,
 };
 type SimpleInterpolation = Interpolation<object>;
 export type Media = {
