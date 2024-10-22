@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "@/style/global.css";
+import "./global.css";
 import Providers from "@/utils/provider";
 import { MainLayout } from "@/components/layout/MainLayout";
 
