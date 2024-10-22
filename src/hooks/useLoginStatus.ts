@@ -18,6 +18,9 @@ export const useLoginStatus = () => {
         });
         const data = await response.json();
         setIsLogin(data.isLogin === "true");
+        if (data.isLogin === "false") {
+          logout();
+        }
       } catch (error) {
         console.error("로그인 상태 확인 중 오류 발생", error);
         setIsLogin(false);
