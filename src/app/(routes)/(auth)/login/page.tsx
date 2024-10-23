@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginPayload, loginSchema } from "@/utils/schema";
 import { useForm } from "react-hook-form";
@@ -17,11 +16,8 @@ import { Button } from "@/components/ui/button";
 import { useLogin } from "@/lib/auth/hooks/useLogin";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import formatErrorMessage from "@/apis/formatError";
-import { useEffect } from "react";
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const form = useForm<LoginPayload>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -30,7 +26,6 @@ export default function LoginPage() {
     },
   });
   const setUser = useAuthStore((state) => state.setUser);
-  const user = useAuthStore((state) => state.user);
   const { mutate: loginMutation, isError, error } = useLogin();
 
   const onSubmit = (values: LoginPayload) => {
