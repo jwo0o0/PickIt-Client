@@ -14,6 +14,6 @@ export interface UserDTO {
   email: string;
   password: string;
   nickname: string;
-  bio: string;
-  profileImage: File | null;
+  bio?: string;
+  profileImage?: File | null;
 }

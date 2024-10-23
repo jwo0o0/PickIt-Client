@@ -1,71 +1,172 @@
 "use client";
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SignupPayload, signupSchema } from "@/utils/schema";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
 import { useSignup } from "@/lib/auth/hooks/useSignup";
-import { useLogout } from "@/lib/auth/hooks/useLogout";
 
 export default function SignupPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [bio, setBio] = useState("");
-  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const form = useForm<SignupPayload>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      email: "",
+      nickname: "",
+      password: "",
+      confirmPassword: "",
+      bio: "",
+      profileImage: undefined,
+    },
+  });
+  const { setValue } = form;
 
-  const { mutate: signupMutation, isPending, error } = useSignup();
-  const { mutate: logoutMutation } = useLogout();
+  const { mutate: signupMutation, isPending } = useSignup();
 
-  const handleSignup = () => {
-    signupMutation({
-      userData: {
-        email,
-        password,
-        nickname,
-        bio,
-        profileImage,
+  const onSubmit = (values: SignupPayload) => {
+    signupMutation(
+      {
+        userData: {
+          email: values.email,
+          password: values.password,
+          nickname: values.nickname,
+          bio: values.bio,
+          profileImage: values.profileImage,
+        },
       },
-    });
+      {
+        onError: () => {
+          alert("회원가입에 실패했습니다.");
+        },
+      }
+    );
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
-    setProfileImage(file);
+    if (file) setValue("profileImage", file);
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Nickname"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-        />
-        <textarea
-          placeholder="Bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        />
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        <button onClick={handleSignup}>Sign Up</button>
-      </form>
-      <button
-        onClick={() => {
-          logoutMutation();
-        }}
-      >
-        로그아웃
-      </button>
+    <div className="min-h-full pt-10 pb-20 flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel className="text-slate-900">이메일</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="w-80 mb-5 border-slate-300" />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="nickname"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel className="text-slate-900">닉네임</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="w-80 mb-5 border-slate-300" />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel className="text-slate-900">비밀번호</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="w-80 mb-5 border-slate-300"
+                      type="password"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel className="text-slate-900">
+                    비밀번호 확인
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="w-80 mb-5 border-slate-300"
+                      type="password"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bio"
+              render={({ field }) => (
+                <FormItem className="mb-2">
+                  <FormLabel className="text-slate-900">소개</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="w-80 mb-5 border-slate-300" />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="profileImage"
+              render={() => (
+                <FormItem className="mb-2">
+                  <FormLabel className="text-slate-900">
+                    프로필 이미지
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="w-80 mb-5 border-slate-300"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            <Button
+              type="submit"
+              className={`w-80 mt-8 hover:bg-slate-800 ${
+                isPending ? "bg-slate-700" : "bg-slate-900"
+              }`}
+              disabled={isPending}
+            >
+              {isPending ? "회원가입 중..." : "회원가입"}
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 }
