@@ -19,7 +19,7 @@ export const BottomNavbar = () => {
       name: "like",
     },
     {
-      href: "/user/[id]?id=1",
+      href: "/user",
       name: "user",
     },
   ];

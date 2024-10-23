@@ -6,7 +6,7 @@ export const MainContent = ({ children }: MainContentProps) => {
     <div
       className="relative overflow-y-scroll scrollbar-hide
       bg-white w-full min-h-screen
-        md:w-[600px] md:border-l md:border-r md:border-slate-200
+        md:w-[600px] md:border-l md:border-r md:border-slate-300
         lg:w-[680px]
         "
     >

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
+import { useAuthStore } from "@/store/auth/useAuthStore";
 
 interface NavbarButtonProps {
   href: string;
@@ -12,6 +13,10 @@ export const NavbarButton = ({ href, name }: NavbarButtonProps) => {
   const pathname = usePathname();
   const isActive = pathname === href;
   const [isHovered, setIsHovered] = useState(false);
+
+  const user = useAuthStore((state) => state.user);
+
+  const pageHref = name === "user" ? `/user/${user?.id}` : href;
 
   const iconBasePath = "/icons/";
   const getIconSrc = () => {
@@ -31,7 +36,7 @@ export const NavbarButton = ({ href, name }: NavbarButtonProps) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={href}>
+      <Link href={pageHref}>
         <div
           className={`transition-transform duration-300 ease-in-out ${
             isHovered ? "scale-105" : "scale-100"
