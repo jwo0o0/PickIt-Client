@@ -8,13 +8,13 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { useLogin } from "@/lib/auth/hooks/useLogin";
+import formatErrorMessage from "@/apis/formatError";
 
 export default function LoginPage() {
   const form = useForm<LoginPayload>({
@@ -26,17 +26,10 @@ export default function LoginPage() {
   });
   const { isValid } = form.formState;
 
-  const { mutate: loginMutation } = useLogin();
+  const { mutate: loginMutation, isError, error } = useLogin();
 
   const onSubmit = (values: LoginPayload) => {
-    loginMutation(
-      { email: values.email, password: values.password },
-      {
-        onError: (error) => {
-          alert("회원가입에 실패했습니다.");
-        },
-      }
-    );
+    loginMutation({ email: values.email, password: values.password });
   };
 
   return (
@@ -81,9 +74,14 @@ export default function LoginPage() {
               </FormItem>
             )}
           />
+          {isError && (
+            <FormMessage className="mt-2 text-slate-700">
+              {formatErrorMessage(error?.message)}
+            </FormMessage>
+          )}
           <Button
             type="submit"
-            className={`w-80 mt-12 bg-indigo-500 hover:bg-indigo-600`}
+            className={`w-80 mt-8 bg-indigo-500 hover:bg-indigo-600`}
           >
             로그인
           </Button>
