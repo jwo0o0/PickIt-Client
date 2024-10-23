@@ -10,6 +10,7 @@ export function middleware(request: NextRequest) {
   const accessToken = cookies.get("accessToken");
   const { pathname } = nextUrl;
 
+  console.log("middleware", accessToken, pathname);
   if (accessToken) {
     response.cookies.set("isLogin", "true", { httpOnly: true, path: "/" });
   } else {

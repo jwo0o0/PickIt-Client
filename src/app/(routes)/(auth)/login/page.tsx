@@ -37,6 +37,7 @@ export default function LoginPage() {
       {
         onSuccess: (userData) => {
           setUser(userData.user);
+          console.log(useAuthStore.getState().user);
           router.push("/");
         },
       }
