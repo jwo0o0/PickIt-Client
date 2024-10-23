@@ -17,8 +17,8 @@ export const useLoginStatus = () => {
           },
         });
         const data = await response.json();
-        setIsLogin(data.isLogin === "true");
-        if (data.isLogin === "false") {
+        setIsLogin(data.isLogin);
+        if (!data.isLogin) {
           logout();
         }
       } catch (error) {
