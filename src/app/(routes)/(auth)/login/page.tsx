@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useLogin } from "@/lib/auth/hooks/useLogin";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import formatErrorMessage from "@/apis/formatError";
+import { useEffect } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function LoginPage() {
     },
   });
   const setUser = useAuthStore((state) => state.setUser);
+  const user = useAuthStore((state) => state.user);
   const { mutate: loginMutation, isError, error } = useLogin();
 
   const onSubmit = (values: LoginPayload) => {
@@ -37,8 +39,7 @@ export default function LoginPage() {
       {
         onSuccess: (userData) => {
           setUser(userData.user);
-          console.log(useAuthStore.getState().user);
-          router.push("/");
+          window.location.href = "/";
         },
       }
     );

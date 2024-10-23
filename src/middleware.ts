@@ -10,11 +10,10 @@ export function middleware(request: NextRequest) {
   const accessToken = cookies.get("accessToken");
   const { pathname } = nextUrl;
 
-  console.log("middleware", accessToken, pathname);
   if (accessToken) {
-    response.cookies.set("isLogin", "true", { httpOnly: true, path: "/" });
+    response.cookies.set("isLogin", "true", { httpOnly: false, path: "/" });
   } else {
-    response.cookies.set("isLogin", "false", { httpOnly: true, path: "/" });
+    response.cookies.set("isLogin", "false", { httpOnly: false, path: "/" });
   }
 
   // 로그인이 필요한 페이지

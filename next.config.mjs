@@ -6,8 +6,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        destination: `${process.env.NEXT_PUBLIC_PROD_API_URL}`,
-        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_DEV_API_URL}`,
+        source: "/:path*",
       },
     ];
   },
