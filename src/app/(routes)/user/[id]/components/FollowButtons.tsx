@@ -6,6 +6,7 @@ interface FollowButtonsProps {
 }
 export const FollowButtons = ({ userIdParam }: FollowButtonsProps) => {
   const { isLogin, isLoading } = useLoginStatus();
+  console.log("id", userIdParam);
   return (
     <>
       {isLogin && !isLoading && (
