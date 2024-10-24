@@ -1,5 +1,5 @@
-import { UploadProfileImageResponse } from "./types";
-import { customFormFetch, IMAGE_API } from "@/apis";
+import { UploadProfileImageResponse, UserProfileResponse } from "./types";
+import { customFetch, customFormFetch, IMAGE_API, USER_API } from "@/apis";
 
 export const uploadProfileImage = async (
   profileImage: File,
@@ -11,4 +11,10 @@ export const uploadProfileImage = async (
     method: "POST",
     body: formData,
   });
+};
+
+export const getUserProfile = async (
+  userId: number
+): Promise<UserProfileResponse> => {
+  return await customFetch(`${USER_API.GET_USER_PROFILE}/${userId}`);
 };

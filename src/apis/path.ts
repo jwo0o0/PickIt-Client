@@ -10,4 +10,8 @@ const IMAGE_API = {
   PROFILE_UPLOAD: "/image/profile?",
 };
 
-export { AUTH_API, IMAGE_API };
+const USER_API = {
+  GET_USER_PROFILE: "/user/profile",
+};
+
+export { AUTH_API, IMAGE_API, USER_API };
