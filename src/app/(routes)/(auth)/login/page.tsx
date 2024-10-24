@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useLogin } from "@/lib/auth/hooks/useLogin";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import formatErrorMessage from "@/apis/formatError";
+import { setCookie } from "cookies-next";
 
 export default function LoginPage() {
   const form = useForm<LoginPayload>({
@@ -34,6 +35,10 @@ export default function LoginPage() {
       {
         onSuccess: (userData) => {
           setUser(userData.user);
+          setCookie("isLogin", "true", {
+            httpOnly: false,
+            path: "/",
+          });
           window.location.href = "/";
         },
       }

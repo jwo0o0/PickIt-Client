@@ -4,10 +4,14 @@ const nextConfig = {
     styledComponents: true,
   },
   async rewrites() {
+    const destinationUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_PROD_API_URL
+        : process.env.NEXT_PUBLIC_DEV_API_URL;
     return [
       {
-        destination: `${process.env.NEXT_PUBLIC_DEV_API_URL}`,
-        source: "/:path*",
+        source: "/api/:path*",
+        destination: `${destinationUrl}/:path*`,
       },
     ];
   },
