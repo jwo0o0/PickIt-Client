@@ -3,8 +3,8 @@ import { persist } from "zustand/middleware";
 import { AuthStore } from "./types";
 import { User } from "@/lib/auth/types";
 
-export const useAuthStore = create(
-  persist<AuthStore>(
+export const useAuthStore = create<AuthStore>()(
+  persist(
     (set) => ({
       user: null,
       setUser: (user: User) => {
@@ -16,6 +16,7 @@ export const useAuthStore = create(
     }),
     {
       name: "authStore",
+      skipHydration: true,
     }
   )
 );

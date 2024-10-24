@@ -13,9 +13,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useSignup } from "@/lib/auth/hooks/useSignup";
+import { setCookie } from "cookies-next";
 
 export default function SignupPage() {
+  const { setUser } = useAuthStore();
+
   const form = useForm<SignupPayload>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -43,6 +47,14 @@ export default function SignupPage() {
         },
       },
       {
+        onSuccess: (userData) => {
+          setUser(userData.user);
+          setCookie("isLogin", "true", {
+            httpOnly: false,
+            path: "/",
+          });
+          window.location.href = "/";
+        },
         onError: () => {
           alert("회원가입에 실패했습니다.");
         },
