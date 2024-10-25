@@ -47,12 +47,16 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
       )}
       <div id="userInfo" className="w-full flex">
         <div
-          className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 bg-slate-200 rounded-full
-          display: flex justify-center items-center overflow-hidden
-        "
+          className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 border bg-slate-200 rounded-full
+          display: flex justify-center items-center overflow-hidden relative"
         >
           {data?.profileImage ? (
-            <Image src="" alt="프로필 이미지" />
+            <Image
+              src={`${data?.profileImage}`}
+              alt="프로필 이미지"
+              fill={true}
+              className="rounded-full"
+            />
           ) : (
             <Image
               src="/images/default_user_profile.webp"
