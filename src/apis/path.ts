@@ -4,6 +4,7 @@ const AUTH_API = {
   KAKAO: "/auth/kakao",
   REFRESH: "/auth/refresh",
   LOGOUT: "/auth/logout",
+  KAKAO_SIGNUP: "/auth/signup/kakao",
 };
 
 const IMAGE_API = {
