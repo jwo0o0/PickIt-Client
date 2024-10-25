@@ -57,5 +57,12 @@ export const signupSchema = z
     message: "비밀번호가 일치하지 않습니다.",
   });
 
+export const kakaoSignupSchema = z.object({
+  email: emailSchema,
+  profileImage: profileImageSchema,
+  bio: bioSchema,
+});
+
 export type LoginPayload = z.infer<typeof loginSchema>;
 export type SignupPayload = z.infer<typeof signupSchema>;
+export type KakaoPayload = z.infer<typeof kakaoSignupSchema>;

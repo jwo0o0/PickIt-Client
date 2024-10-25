@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginPayload, loginSchema } from "@/utils/schema";
 import { useForm } from "react-hook-form";
@@ -45,6 +46,15 @@ export default function LoginPage() {
     );
   };
 
+  const handleClickKakaoLogin = () => {
+    const url = `${
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_PROD_API_URL
+        : process.env.NEXT_PUBLIC_DEV_API_URL
+    }/auth/kakao`;
+    window.location.href = url;
+  };
+
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       <div className="mb-6 text-headline1 font-bold text-slate-900">
@@ -57,7 +67,6 @@ export default function LoginPage() {
             name="email"
             render={({ field }) => (
               <FormItem className="mb-2">
-                {/* <FormLabel className="text-slate-900">이메일</FormLabel> */}
                 <FormControl>
                   <Input
                     placeholder="이메일"
@@ -74,7 +83,6 @@ export default function LoginPage() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                {/* <FormLabel className="text-slate-900">비밀번호</FormLabel> */}
                 <FormControl>
                   <Input
                     placeholder="비밀번호"
@@ -100,6 +108,15 @@ export default function LoginPage() {
           </Button>
         </form>
       </Form>
+      <button className="mt-2" onClick={handleClickKakaoLogin}>
+        <Image
+          src="/images/kakao_login.webp"
+          alt="카카오 로그인"
+          width="320"
+          height="40"
+          priority={true}
+        />
+      </button>
       <div className="flex mt-6">
         <div className="text-body2Normal text-slate-400 font-medium mr-1">
           회원이 아니신가요?

@@ -4,16 +4,24 @@ import Link from "next/link";
 import { FollowButtons } from "./FollowButtons";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useStore } from "zustand";
+import { useQuery } from "@tanstack/react-query";
+import userKeys from "@/lib/user/queries";
+import { getUserProfile } from "@/lib/user/api";
 
 interface UserProfileProps {
   userIdParam: string;
 }
 export const UserProfile = ({ userIdParam }: UserProfileProps) => {
   const user = useStore(useAuthStore, (state) => state.user);
+  const { data } = useQuery({
+    queryKey: userKeys.profile(Number(userIdParam)),
+    queryFn: () => getUserProfile(Number(userIdParam)),
+  });
+
   return (
     <div className="relative w-full px-6 py-6 md:px-8 md:py-8 border-b border-b-slate-300">
       {String(user?.id) === userIdParam && (
-        <Link href="/user/edit">
+        <Link href="/user/settings">
           <button className="absolute top-6 right-6 md:top-8 md:right-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,25 +46,48 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
         </Link>
       )}
       <div id="userInfo" className="w-full flex">
-        <div className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 bg-slate-200 rounded-full">
-          <Image src="" alt="프로필 이미지" />
+        <div
+          className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 bg-slate-200 rounded-full
+          display: flex justify-center items-center overflow-hidden
+        "
+        >
+          {data?.profileImage ? (
+            <Image src="" alt="프로필 이미지" />
+          ) : (
+            <Image
+              src="/images/default_user_profile.webp"
+              alt="프로필 이미지"
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{
+                width: "70%",
+                height: "auto",
+              }}
+              priority={true}
+            />
+          )}
         </div>
         <div className="flex-1">
           <div className="text-headline2 md:text-heading2 font-medium text-slate-900">
-            user_nickname
+            {data?.nickname}
           </div>
           <div
             className="text-slate-700 text-label1Normal md:text-body2Normal
           mt-2 mb-2 md:mt-3 md:mb-3
           "
           >
-            <span className="font-medium mr-0.5 md:mr-1">25</span>
+            <span className="font-medium mr-0.5 md:mr-1">
+              {data?.followings}
+            </span>
             <span className="mr-2">팔로잉</span>
-            <span className="font-medium mr-0.5 md:mr-1">25</span>
+            <span className="font-medium mr-0.5 md:mr-1">
+              {data?.followings}
+            </span>
             <span>팔로워</span>
           </div>
           <div className="text-slate-800 text-label2Normal md:text-body2Normal text-justify">
-            user bio hello world
+            {data?.bio}
           </div>
         </div>
       </div>
