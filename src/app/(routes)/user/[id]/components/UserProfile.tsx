@@ -19,10 +19,10 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
   });
 
   return (
-    <div className="relative w-full px-6 py-6 md:px-8 md:py-8 border-b border-b-slate-300">
+    <div className="relative w-full py-6 px-2 md:py-8 border-b border-b-slate-300">
       {String(user?.id) === userIdParam && (
         <Link href="/user/settings">
-          <button className="absolute top-6 right-6 md:top-8 md:right-8">
+          <button className="absolute top-6 right-2 md:top-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
