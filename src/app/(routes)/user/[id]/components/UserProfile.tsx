@@ -21,7 +21,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
   return (
     <div className="relative w-full py-6 px-2 md:py-8 border-b border-b-slate-300">
       {String(user?.id) === userIdParam && (
-        <Link href="/user/settings">
+        <Link href="/user/settings" scroll={false}>
           <button className="absolute top-6 right-2 md:top-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"

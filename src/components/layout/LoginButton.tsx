@@ -9,7 +9,9 @@ export const LoginButton = () => {
     <>
       {!isLoading && !isLogin && (
         <Button className="fixed top-4 right-4 bg-indigo-500 hover:bg-indigo-600 hidden md:block">
-          <Link href="/login">로그인</Link>
+          <Link href="/login" scroll={false}>
+            로그인
+          </Link>
         </Button>
       )}
     </>

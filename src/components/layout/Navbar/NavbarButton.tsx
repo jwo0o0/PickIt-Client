@@ -36,7 +36,7 @@ export const NavbarButton = ({ href, name }: NavbarButtonProps) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={pageHref}>
+      <Link href={pageHref} scroll={false}>
         <div
           className={`transition-transform duration-300 ease-in-out ${
             isHovered ? "scale-105" : "scale-100"

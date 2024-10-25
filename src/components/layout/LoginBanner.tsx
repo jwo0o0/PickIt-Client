@@ -14,10 +14,14 @@ export const LoginBanner = () => {
                     flex items-center justify-center"
         >
           <Button className="w-48 max-w-[40%] mr-2 bg-slate-200 text-slate-900 hover:bg-slate-300">
-            <Link href="/login">로그인</Link>
+            <Link href="/login" scroll={false}>
+              로그인
+            </Link>
           </Button>
           <Button className="w-48 max-w-[40%] ml-2 bg-indigo-500 hover:bg-indigo-600">
-            <Link href="/login">회원가입</Link>
+            <Link href="/login" scroll={false}>
+              회원가입
+            </Link>
           </Button>
         </div>
       )}

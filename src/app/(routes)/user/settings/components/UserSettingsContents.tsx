@@ -11,7 +11,9 @@ export const UserSettingsContents = () => {
         className="w-full flex justify-between px-4 py-2
         bg-white hover:bg-white text-slate-900 text-md font-medium"
       >
-        <Link href="/user/edit">프로필 수정</Link>
+        <Link href="/user/edit" scroll={false}>
+          프로필 수정
+        </Link>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
