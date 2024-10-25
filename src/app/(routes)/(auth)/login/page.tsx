@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginPayload, loginSchema } from "@/utils/schema";
+import { LoginPayload, loginSchema } from "@/utils/authSchema";
 import { useForm } from "react-hook-form";
 import {
   Form,
