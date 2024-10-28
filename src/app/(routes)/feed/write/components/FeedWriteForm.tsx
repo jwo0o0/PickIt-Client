@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FeedPayload, feedSchema } from "@/utils/feedSchema";
@@ -14,8 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
+import { usePostFeed } from "@/lib/feed/hooks/usePostFeed";
+import { PostFeedResponse } from "@/lib/feed/feedTypes";
 
 export const FeedWriteForm = () => {
+  const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FeedPayload>({
@@ -36,8 +40,28 @@ export const FeedWriteForm = () => {
   const content = watch("content");
   const pollContent = watch("pollContent");
 
+  const { mutate: postFeedMutation } = usePostFeed();
+
   const onSubmit = (values: FeedPayload) => {
-    console.log(values);
+    postFeedMutation(
+      {
+        feedData: {
+          content: values.content,
+          pollContent: values.pollContent,
+          polls: values.polls,
+          images: values.images,
+        },
+      },
+      {
+        onSuccess: (response: PostFeedResponse) => {
+          router.push(`/feed/${response.feedId}`);
+        },
+        onError: () => {
+          router.push("/");
+          alert("피드 등록에 실패했습니다.");
+        },
+      }
+    );
   };
 
   const handleClickImageButton = () => {

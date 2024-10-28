@@ -9,10 +9,15 @@ const AUTH_API = {
 
 const IMAGE_API = {
   PROFILE_UPLOAD: "/image/profile?",
+  FEED_UPLOAD: "/image/feeds?",
 };
 
 const USER_API = {
   GET_USER_PROFILE: "/user/profile",
 };
 
-export { AUTH_API, IMAGE_API, USER_API };
+const FEED_API = {
+  POST_FEED: "/feeds",
+};
+
+export { AUTH_API, IMAGE_API, USER_API, FEED_API };

@@ -18,3 +18,12 @@ export const getUserProfile = async (
 ): Promise<UserProfileResponse> => {
   return await customFetch(`${USER_API.GET_USER_PROFILE}/${userId}`);
 };
+
+export const uploadFeedImages = async (images: File[], feedId: number) => {
+  const formData = new FormData();
+  images.forEach((image) => formData.append("images", image));
+  return customFormFetch(`${IMAGE_API.FEED_UPLOAD}feedId=${feedId}`, {
+    method: "POST",
+    body: formData,
+  });
+};
