@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AuthUser, UserDTO } from "../types";
+import { AuthUser, UserDTO } from "../authTypes";
 import { customFetch, AUTH_API } from "@/apis";
 import { uploadProfileImage } from "@/lib/user/api";
 
