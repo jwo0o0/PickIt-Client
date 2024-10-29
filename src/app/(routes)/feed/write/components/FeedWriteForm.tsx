@@ -105,7 +105,6 @@ export const FeedWriteForm = () => {
 
   return (
     <div className="pt-24 h-full relative">
-      <div></div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
