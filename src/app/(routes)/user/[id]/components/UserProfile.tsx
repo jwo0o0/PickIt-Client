@@ -2,24 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FollowButtons } from "./FollowButtons";
-import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useStore } from "zustand";
-import { useQuery } from "@tanstack/react-query";
-import userKeys from "@/lib/user/queries";
-import { getUserProfile } from "@/lib/user/api";
+import { useAuthStore } from "@/store/auth/useAuthStore";
+import { useGetProfile } from "@/lib/user/hooks/useGetProfile";
 
 interface UserProfileProps {
   userIdParam: string;
 }
 export const UserProfile = ({ userIdParam }: UserProfileProps) => {
   const user = useStore(useAuthStore, (state) => state.user);
-  const { data } = useQuery({
-    queryKey: userKeys.profile(Number(userIdParam)),
-    queryFn: () => getUserProfile(Number(userIdParam)),
-  });
+  const { data } = useGetProfile(Number(userIdParam));
 
   return (
-    <div className="relative w-full py-6 px-2 md:py-8 border-b border-b-slate-300">
+    <div className="relative w-full py-4 px-2 md:py-6 border-b border-b-slate-300">
       {String(user?.id) === userIdParam && (
         <Link href="/user/settings" scroll={false}>
           <button className="absolute top-6 right-2 md:top-8">
