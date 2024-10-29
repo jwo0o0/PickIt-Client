@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AuthUser } from "../authTypes";
 import { customFetch, AUTH_API } from "@/apis";
-import { uploadProfileImage } from "@/lib/user/api";
+import { uploadProfileImage } from "@/lib/user/userApis";
 
 export const useKakaoSignup = () => {
   return useMutation<
