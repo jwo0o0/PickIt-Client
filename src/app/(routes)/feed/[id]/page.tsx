@@ -1,5 +1,5 @@
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
-import { ContentHeader } from "@/components/common/ContentHeader";
+import { ContentHeader } from "@/components/layout/ContentHeader";
 import { FeedContent } from "@/components/feed/FeedContent";
 
 import {

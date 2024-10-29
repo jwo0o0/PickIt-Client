@@ -1,7 +1,7 @@
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
-import { ContentHeader } from "@/components/common/ContentHeader";
-import { UserProfile } from "./components/UserProfile";
-import { UserFeeds } from "./components/UserFeeds";
+import { ContentHeader } from "@/components/layout/ContentHeader";
+import { UserProfile } from "@/components/user/UserProfile";
+import { UserFeeds } from "@/components/user/UserFeeds";
 
 import {
   HydrationBoundary,

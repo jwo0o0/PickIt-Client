@@ -1,5 +1,5 @@
-import { ContentHeader } from "@/components/common/ContentHeader";
-import { FeedWriteForm } from "./components/FeedWriteForm";
+import { ContentHeader } from "@/components/layout/ContentHeader";
+import { FeedWriteForm } from "@/components/feed/FeedWriteForm";
 
 export default function FeedWritePage() {
   return (
