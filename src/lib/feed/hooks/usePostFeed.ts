@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { FeedPayload } from "@/utils/feedSchema";
 import { PostFeedResponse } from "../feedTypes";
 import { customFetch, FEED_API } from "@/apis";
-import { uploadFeedImages } from "@/lib/user/api";
+import { uploadFeedImages } from "@/lib/user/userApis";
 
 export const usePostFeed = () => {
   return useMutation<PostFeedResponse, Error, { feedData: FeedPayload }>({
