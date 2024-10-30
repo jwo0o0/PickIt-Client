@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import feedKeys from "@/lib/feed/feedQueries";
 import { useVoteFeed } from "@/lib/feed/hooks/useVoteFeed";
 import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
-import { useLoginStatus } from "@/hooks/useLoginStatus";
+import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import timeAgo from "@/utils/timeAgo";
 
 export const Feed = ({

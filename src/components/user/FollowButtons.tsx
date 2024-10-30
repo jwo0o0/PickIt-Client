@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useLoginStatus } from "@/hooks/useLoginStatus";
+import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 
 interface FollowButtonsProps {
   userIdParam: string;

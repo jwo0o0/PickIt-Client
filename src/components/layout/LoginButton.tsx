@@ -1,5 +1,5 @@
 "use client";
-import { useLoginStatus } from "@/hooks/useLoginStatus";
+import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
