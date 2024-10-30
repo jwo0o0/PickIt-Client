@@ -179,7 +179,7 @@ export const Feed = ({
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="size-5 stroke-slate-600"
+                className="transition-all duration-300 ease-in-out size-5 stroke-slate-600 hover:stroke-red-400 hover:scale-105"
               >
                 <path
                   strokeLinecap="round"
