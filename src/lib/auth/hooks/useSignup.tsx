@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { AuthUser, UserDTO } from "../types";
+import { AuthUser, UserDTO } from "../authTypes";
 import { customFetch, AUTH_API } from "@/apis";
-import { uploadProfileImage } from "@/lib/user/api";
+import { uploadProfileImage } from "@/lib/user/userApis";
 
 export const useSignup = () => {
   return useMutation<AuthUser, Error, { userData: UserDTO }>({

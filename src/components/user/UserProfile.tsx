@@ -2,27 +2,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FollowButtons } from "./FollowButtons";
-import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useStore } from "zustand";
-import { useQuery } from "@tanstack/react-query";
-import userKeys from "@/lib/user/queries";
-import { getUserProfile } from "@/lib/user/api";
+import { useAuthStore } from "@/store/auth/useAuthStore";
+import { useGetProfile } from "@/lib/user/hooks/useGetProfile";
 
 interface UserProfileProps {
   userIdParam: string;
 }
 export const UserProfile = ({ userIdParam }: UserProfileProps) => {
   const user = useStore(useAuthStore, (state) => state.user);
-  const { data } = useQuery({
-    queryKey: userKeys.profile(Number(userIdParam)),
-    queryFn: () => getUserProfile(Number(userIdParam)),
-  });
+  const { data } = useGetProfile(Number(userIdParam));
 
   return (
-    <div className="relative w-full px-6 py-6 md:px-8 md:py-8 border-b border-b-slate-300">
+    <div className="relative w-full py-4 px-2 md:py-6 border-b border-b-slate-300">
       {String(user?.id) === userIdParam && (
-        <Link href="/user/settings">
-          <button className="absolute top-6 right-6 md:top-8 md:right-8">
+        <Link href="/user/settings" scroll={false}>
+          <button className="absolute top-6 right-2 md:top-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -47,12 +42,16 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
       )}
       <div id="userInfo" className="w-full flex">
         <div
-          className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 bg-slate-200 rounded-full
-          display: flex justify-center items-center overflow-hidden
-        "
+          className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 border bg-slate-200 rounded-full
+          display: flex justify-center items-center overflow-hidden relative"
         >
           {data?.profileImage ? (
-            <Image src="" alt="프로필 이미지" />
+            <Image
+              src={`${data?.profileImage}`}
+              alt="프로필 이미지"
+              fill={true}
+              className="rounded-full"
+            />
           ) : (
             <Image
               src="/images/default_user_profile.webp"

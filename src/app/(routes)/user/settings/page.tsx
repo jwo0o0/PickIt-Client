@@ -1,5 +1,5 @@
-import { ContentHeader } from "@/components/common/ContentHeader";
-import { UserSettingsContents } from "./components/UserSettingsContents";
+import { ContentHeader } from "@/components/layout/ContentHeader";
+import { UserSettingsContents } from "@/components/user/UserSettingsContents";
 
 export default function UserSettingPage() {
   return (

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginPayload, loginSchema } from "@/utils/schema";
+import { LoginPayload, loginSchema } from "@/utils/authSchema";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -126,6 +126,7 @@ export default function LoginPage() {
           className="text-body2Normal text-slate-900 font-medium 
           hover:cursor-pointer ml-1 hover:text-indigo-500 
           transition-colors duration-300"
+          scroll={false}
         >
           회원가입 하러 가기
         </Link>

@@ -9,7 +9,6 @@ export default function KakaoLoginPage() {
   const id = searchParams.get("id");
   const nickname = searchParams.get("nickname");
   const email = searchParams.get("email");
-  console.log(id, nickname, email);
 
   const { setUser } = useAuthStore();
 

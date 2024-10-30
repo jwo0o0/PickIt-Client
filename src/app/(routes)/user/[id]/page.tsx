@@ -1,27 +1,31 @@
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
-import { UserProfile } from "./components/UserProfile";
+import { ContentHeader } from "@/components/layout/ContentHeader";
+import { UserProfile } from "@/components/user/UserProfile";
+import { UserFeeds } from "@/components/user/UserFeeds";
+
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import userKeys from "@/lib/user/queries";
-import { UserProfileResponse } from "@/lib/user/types";
-import { getUserProfile } from "@/lib/user/api";
+import { prefetchProfile } from "@/lib/user/hooks/useGetProfile";
+import { prefetchUserFeeds } from "@/lib/user/hooks/useGetUserFeeds";
 
 export default async function UserPage({ params }: { params: { id: string } }) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery<UserProfileResponse>({
-    queryKey: userKeys.profile(Number(params.id)),
-    queryFn: () => getUserProfile(Number(params.id)),
-  });
+  await prefetchProfile(Number(params.id), queryClient);
+  await prefetchUserFeeds(Number(params.id), queryClient);
 
   return (
     <>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <UserProfile userIdParam={params.id} />
-      </HydrationBoundary>
-      <NavbarWrapper />
+      <ContentHeader title="" />
+      <div className="pt-20 pb-10 h-full overflow-y-scroll scrollbar-hide">
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <UserProfile userIdParam={params.id} />
+        </HydrationBoundary>
+        <UserFeeds userIdParam={params.id} />
+        <NavbarWrapper />
+      </div>
     </>
   );
 }
