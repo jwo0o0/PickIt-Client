@@ -13,7 +13,6 @@ export const useGetProfile = (userId: number) => {
   return useQuery<UserProfileResponse>({
     queryKey: userKeys.profile(userId),
     queryFn: () => getUserProfile(userId),
-    staleTime: 0,
   });
 };
 
