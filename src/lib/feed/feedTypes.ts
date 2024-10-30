@@ -8,7 +8,8 @@ interface UserType {
   profileImage: string | null;
 }
 
-export interface FeedContentType {
+export interface FeedType {
+  feedId: number;
   user: UserType;
   content: string;
   pollContent: string;

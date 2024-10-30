@@ -1,14 +1,14 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import feedKeys from "@/lib/feed/feedQueries";
 import { customFetch, FEED_API } from "@/apis";
-import { FeedContentType } from "@/lib/feed/feedTypes";
+import { FeedType } from "@/lib/feed/feedTypes";
 
-const fetchFeed = async (feedId: number): Promise<FeedContentType> => {
+const fetchFeed = async (feedId: number): Promise<FeedType> => {
   return await customFetch(`${FEED_API.GET_FEED}/${feedId}`);
 };
 
 export const useGetFeed = (feedId: number) => {
-  return useQuery<FeedContentType>({
+  return useQuery<FeedType>({
     queryKey: feedKeys.content(feedId),
     queryFn: () => fetchFeed(feedId),
     staleTime: 0,
