@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Feed } from "./Feed";
-import { Skeleton } from "../ui/skeleton";
 
 import { useGetAllFeed } from "@/lib/feed/hooks/useGetAllFeed";
 import { useEffect, useRef } from "react";
@@ -10,9 +9,9 @@ export default function FeedList() {
   const router = useRouter();
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAllFeed();
-    
+
   useEffect(() => {
     if (isFetchingNextPage) return;
 
@@ -41,31 +40,17 @@ export default function FeedList() {
   return (
     <>
       <div className="mt-6">
-        {isLoading ? (
-          <>
-            {[1, 2, 3, 4, 5].map((_, idx) => (
-              <div key={idx} className="flex w-full">
-                <Skeleton className="h-12 w-12 rounded-full mr-4" />
-                <div className="w-full">
-                  <Skeleton className="h-24 w-full mb-4" />
-                  <Skeleton className="h-8 w-full mb-4" />
-                </div>
-              </div>
-            ))}
-          </>
-        ) : (
-          feeds.map((feed) => (
-            <div
-              key={feed.feedId}
-              onClick={() => {
-                router.push(`/feed/${feed.feedId}`);
-              }}
-              className="my-4 pb-6 border-b border-b-slate-300"
-            >
-              <Feed feedId={feed.feedId} data={feed} />
-            </div>
-          ))
-        )}
+        {feeds.map((feed) => (
+          <div
+            key={feed.feedId}
+            onClick={() => {
+              router.push(`/feed/${feed.feedId}`);
+            }}
+            className="my-4 pb-6 border-b border-b-slate-300"
+          >
+            <Feed feedId={feed.feedId} data={feed} />
+          </div>
+        ))}
         <div ref={loadMoreRef}>
           {isFetchingNextPage ? (
             <div role="status" className="flex justify-center">

@@ -5,13 +5,10 @@ import feedKeys from "../feedQueries";
 
 export const getAllFeed = async (
   pageParam: number = 1,
+  options?: RequestInit,
   limit: number = 5
 ): Promise<FeedListType> => {
-  return await customFetch(FEED_API.GET_ALL_FEED(pageParam, limit), {
-    next: {
-      revalidate: 0,
-    },
-  });
+  return await customFetch(FEED_API.GET_ALL_FEED(pageParam, limit), options);
 };
 
 export const useGetAllFeed = () => {
@@ -21,14 +18,18 @@ export const useGetAllFeed = () => {
     queryFn: ({ pageParam = 1 }) => getAllFeed(pageParam as number),
     getNextPageParam: (lastPage, allPagees) =>
       lastPage.hasNextPage ? allPagees.length + 1 : undefined,
-    staleTime: 0,
   });
 };
 
-export const prefetchAllFeed = async (queryClient: QueryClient) => {
+export const prefetchAllFeed = async (
+  queryClient: QueryClient,
+  options?: RequestInit,
+  limit?: number
+) => {
   await queryClient.prefetchInfiniteQuery({
     queryKey: feedKeys.all,
-    queryFn: ({ pageParam = 1 }) => getAllFeed(pageParam),
+    queryFn: ({ pageParam = 1 }) =>
+      getAllFeed(pageParam as number, options, limit),
     initialPageParam: undefined,
   });
 };
