@@ -87,7 +87,7 @@ export const Feed = ({
           >
             {data?.user.nickname}
           </Link>
-          <span className="text-slate-400 font-normal">
+          <span className="text-slate-400 font-normal" suppressHydrationWarning>
             {data?.updatedAt ? timeAgo(data.updatedAt) : "N/A"}
           </span>
         </div>
