@@ -37,9 +37,9 @@ export const Comments = ({ feedId }: { feedId: number }) => {
   const comments = data ? data.pages.flatMap((page) => page.comments) : [];
 
   return (
-    <div className="flex-1 mt-4 pb-40 md:pb-32">
+    <div className="flex-1 mt-6 pb-40 md:pb-32">
       {comments.map((comment: CommentType) => (
-        <Comment key={comment.id} data={comment} />
+        <Comment key={comment.id} data={comment} feedId={feedId} />
       ))}
       <div ref={loadMoreRef}>
         {isFetchingNextPage ? (

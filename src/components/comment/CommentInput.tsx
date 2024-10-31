@@ -11,7 +11,7 @@ export const CommentInput = ({ feedId }: { feedId: number }) => {
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const target = event.target;
-    target.style.height = "auto"; // 초기화
+    target.style.height = "40px"; // 초기화
     target.style.height = `${target.scrollHeight}px`; // 텍스트에 맞게 높이 조정
   };
 
@@ -32,7 +32,7 @@ export const CommentInput = ({ feedId }: { feedId: number }) => {
       }
     );
     textAreaRef.current!.value = "";
-    textAreaRef.current!.style.height = "60px";
+    textAreaRef.current!.style.height = "40px";
   };
 
   return (
@@ -41,10 +41,11 @@ export const CommentInput = ({ feedId }: { feedId: number }) => {
     bg-white flex bg-opacity-85"
     >
       <Textarea
-        className="bg-slate-200 min-h-[60px] resize-none"
+        className="bg-slate-200 min-h-[40px] resize-none srcollbar-hide"
         placeholder="댓글을 남겨주세요."
         ref={textAreaRef}
         onInput={handleInput}
+        style={{ height: "40px" }}
       />
       <button
         onClick={handleClickPost}
