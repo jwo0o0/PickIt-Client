@@ -23,7 +23,8 @@ export const Feed = ({
 
   const sum = data?.result.reduce((acc, cur) => acc + cur, 0) ?? 0;
   const max = Math.max(...(data?.result ?? []));
-  const percents = data?.result.map((result) => (result / sum) * 100) ?? [];
+  const percents =
+    data?.result.map((result) => Math.round((result / sum) * 1000) / 10) ?? [];
 
   const { mutate: voteFeedMutation } = useVoteFeed();
 
