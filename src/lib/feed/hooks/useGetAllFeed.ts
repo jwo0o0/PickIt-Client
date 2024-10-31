@@ -18,6 +18,7 @@ export const useGetAllFeed = () => {
     queryFn: ({ pageParam = 1 }) => getAllFeed(pageParam as number),
     getNextPageParam: (lastPage, allPagees) =>
       lastPage.hasNextPage ? allPagees.length + 1 : undefined,
+    refetchOnMount: "always",
   });
 };
 

@@ -17,6 +17,7 @@ export const useGetUserFeeds = (userId: number) => {
   return useQuery<FeedType[], Error>({
     queryKey: userKeys.feeds(userId),
     queryFn: () => fetchFeeds(userId),
+    refetchOnMount: "always",
   });
 };
 
