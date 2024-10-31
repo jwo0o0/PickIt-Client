@@ -17,6 +17,7 @@ export const useGetFeed = (feedId: number) => {
   return useQuery<FeedType>({
     queryKey: feedKeys.content(feedId),
     queryFn: () => fetchFeed(feedId),
+    refetchOnMount: "always",
   });
 };
 
