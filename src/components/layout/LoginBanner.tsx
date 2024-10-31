@@ -9,8 +9,8 @@ export const LoginBanner = () => {
     <>
       {!isLoading && !isLogin && (
         <div
-          className="md:hidden absolute top-0 left-0 right-0 w-full h-20
-                     bg-white bg-opacity-85 
+          className="md:hidden fixed top-0 left-0 right-0 w-full h-20
+                     bg-white bg-opacity-85 z-40
                     flex items-center justify-center"
         >
           <Button className="w-48 max-w-[40%] mr-2 bg-slate-200 text-slate-900 hover:bg-slate-300">

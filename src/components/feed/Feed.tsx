@@ -23,7 +23,8 @@ export const Feed = ({
 
   const sum = data?.result.reduce((acc, cur) => acc + cur, 0) ?? 0;
   const max = Math.max(...(data?.result ?? []));
-  const percents = data?.result.map((result) => (result / sum) * 100) ?? [];
+  const percents =
+    data?.result.map((result) => Math.round((result / sum) * 1000) / 10) ?? [];
 
   const { mutate: voteFeedMutation } = useVoteFeed();
 
@@ -86,7 +87,7 @@ export const Feed = ({
           >
             {data?.user.nickname}
           </Link>
-          <span className="text-slate-400 font-normal">
+          <span className="text-slate-400 font-normal" suppressHydrationWarning>
             {data?.updatedAt ? timeAgo(data.updatedAt) : "N/A"}
           </span>
         </div>

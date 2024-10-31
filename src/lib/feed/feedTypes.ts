@@ -23,3 +23,8 @@ export interface FeedType {
   isVoted: boolean;
   isLiked: boolean;
 }
+
+export interface FeedListType {
+  hasNextPage: boolean;
+  feeds: FeedType[];
+}

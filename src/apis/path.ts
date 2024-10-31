@@ -23,6 +23,8 @@ const FEED_API = {
   VOTE_FEED: "/feeds",
   LIKE_FEED: "/feeds",
   DELETE_FEED: "/feeds",
+  GET_ALL_FEED: (page: number, limit: number) =>
+    `/feeds?page=${page}&limit=${limit}`,
 };
 
 export { AUTH_API, IMAGE_API, USER_API, FEED_API };
