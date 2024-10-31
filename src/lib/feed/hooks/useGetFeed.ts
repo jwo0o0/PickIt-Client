@@ -3,8 +3,12 @@ import feedKeys from "@/lib/feed/feedQueries";
 import { customFetch, FEED_API } from "@/apis";
 import { FeedType } from "@/lib/feed/feedTypes";
 
-const fetchFeed = async (feedId: number): Promise<FeedType> => {
+const fetchFeed = async (
+  feedId: number,
+  options?: RequestInit
+): Promise<FeedType> => {
   return await customFetch(`${FEED_API.GET_FEED}/${feedId}`, {
+    ...options,
     method: "GET",
   });
 };
@@ -18,10 +22,11 @@ export const useGetFeed = (feedId: number) => {
 
 export const prefetchFeed = async (
   feedId: number,
-  queryClient: QueryClient
+  queryClient: QueryClient,
+  options?: RequestInit
 ) => {
   await queryClient.prefetchQuery({
     queryKey: feedKeys.content(feedId),
-    queryFn: () => fetchFeed(feedId),
+    queryFn: () => fetchFeed(feedId, options),
   });
 };
