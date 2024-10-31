@@ -3,8 +3,12 @@ import userKeys from "../userQueries";
 import { customFetch, USER_API } from "@/apis";
 import { FeedType } from "@/lib/feed/feedTypes";
 
-const fetchFeeds = async (userId: number): Promise<FeedType[]> => {
+const fetchFeeds = async (
+  userId: number,
+  options?: RequestInit
+): Promise<FeedType[]> => {
   return await customFetch(`${USER_API.GET_USER_FEEDS}/${userId}/feeds`, {
+    ...options,
     method: "GET",
   });
 };
@@ -18,10 +22,11 @@ export const useGetUserFeeds = (userId: number) => {
 
 export const prefetchUserFeeds = async (
   userId: number,
-  queryClient: QueryClient
+  queryClient: QueryClient,
+  options?: RequestInit
 ) => {
   return queryClient.prefetchQuery<FeedType[], Error>({
     queryKey: userKeys.feeds(userId),
-    queryFn: () => fetchFeeds(userId),
+    queryFn: () => fetchFeeds(userId, options),
   });
 };
