@@ -7,7 +7,7 @@ const fetchFeeds = async (
   userId: number,
   options?: RequestInit
 ): Promise<FeedType[]> => {
-  return await customFetch(`${USER_API.GET_USER_FEEDS}/${userId}/feeds`, {
+  return await customFetch(USER_API.GET_USER_FEEDS(userId), {
     ...options,
     method: "GET",
   });
