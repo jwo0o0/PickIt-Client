@@ -20,7 +20,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
         <div className="flex w-full py-4 px-2 md:py-6  border-b border-b-slate-300">
           <Skeleton className="h-12 w-12 rounded-full mr-4" />
           <div className="w-full">
-            <Skeleton className="h-24 w-full mb-4" />
+            <Skeleton className="h-20 md:h-24 w-full" />
           </div>
         </div>
       ) : (
