@@ -4,7 +4,7 @@ import { Textarea } from "../ui/textarea";
 import { usePostComment } from "@/lib/comment/hooks/usePostComment";
 
 import { useQueryClient } from "@tanstack/react-query";
-import commentKeys from "@/lib/comment/hooks/commentQueries";
+import commentKeys from "@/lib/comment/commentQueries";
 
 export const CommentInput = ({ feedId }: { feedId: number }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);

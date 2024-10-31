@@ -1,7 +1,7 @@
 import { QueryClient, useInfiniteQuery } from "@tanstack/react-query";
 import { customFetch, COMMENT_API } from "@/apis";
 import { CommentListType } from "../commentTypes";
-import commentKeys from "./commentQueries";
+import commentKeys from "../commentQueries";
 
 export const getComments = async (
   feedId: number,

@@ -9,7 +9,7 @@ import { CommentType } from "@/lib/comment/commentTypes";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteComment } from "@/lib/comment/hooks/useDeleteComment";
-import commentKeys from "@/lib/comment/hooks/commentQueries";
+import commentKeys from "@/lib/comment/commentQueries";
 import feedKeys from "@/lib/feed/feedQueries";
 import timeAgo from "@/utils/timeAgo";
 
