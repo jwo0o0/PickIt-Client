@@ -7,7 +7,7 @@ export const uploadProfileImage = async (
 ): Promise<UploadProfileImageResponse> => {
   const formData = new FormData();
   formData.append("profileImage", profileImage);
-  return customFormFetch(`${IMAGE_API.PROFILE_UPLOAD}userId=${userId}`, {
+  return customFormFetch(IMAGE_API.PROFILE_UPLOAD(userId), {
     method: "POST",
     body: formData,
   });
@@ -16,7 +16,7 @@ export const uploadProfileImage = async (
 export const uploadFeedImages = async (images: File[], feedId: number) => {
   const formData = new FormData();
   images.forEach((image) => formData.append("images", image));
-  return customFormFetch(`${IMAGE_API.FEED_UPLOAD}feedId=${feedId}`, {
+  return customFormFetch(IMAGE_API.FEED_UPLOAD(feedId), {
     method: "POST",
     body: formData,
   });
