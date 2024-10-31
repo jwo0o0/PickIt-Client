@@ -1,8 +1,9 @@
 "use client";
 import { useRef } from "react";
-
 import { Textarea } from "../ui/textarea";
-export const CommentInput = () => {
+import { usePostComment } from "@/lib/comment/hooks/usePostComment";
+
+export const CommentInput = ({ feedId }: { feedId: number }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -11,18 +12,31 @@ export const CommentInput = () => {
     target.style.height = `${target.scrollHeight}px`; // 텍스트에 맞게 높이 조정
   };
 
+  const { mutate: postCommentMutation } = usePostComment();
+  const handleClickPost = async () => {
+    const content = textAreaRef.current?.value;
+    if (!content) return;
+
+    postCommentMutation({ feedId, content });
+    textAreaRef.current!.value = "";
+    textAreaRef.current!.style.height = "60px";
+  };
+
   return (
     <div
       className="w-full px-4 py-4 md:py-6 absolute bottom-[68px] md:bottom-0 left-0 right-0
     bg-white flex"
     >
       <Textarea
-        className="bg-slate-200 min-h-[40px] md:min-h-[70px] resize-none"
+        className="bg-slate-200 min-h-[60px] resize-none"
         placeholder="댓글을 남겨주세요."
         ref={textAreaRef}
         onInput={handleInput}
       />
-      <button className="w-12 ml-4 flex items-center justify-center">
+      <button
+        onClick={handleClickPost}
+        className="w-12 ml-4 flex items-center justify-center"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
