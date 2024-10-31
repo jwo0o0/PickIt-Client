@@ -57,21 +57,26 @@ export const Feed = ({
   };
 
   return (
-    <div className="h-full relative flex">
+    <div className="relative flex h-fit">
       <div
         id="profileImage"
         className="shrink-0 w-10 h-10 mr-4 border bg-slate-200 rounded-full
           display: flex justify-center items-center overflow-hidden relative"
       >
         {data?.user.profileImage ? (
-          <Image src={data.user.profileImage} alt="프로필 이미지" fill={true} />
+          <Image
+            src={data.user.profileImage}
+            alt="프로필 이미지"
+            fill={true}
+            sizes="40px"
+          />
         ) : (
           <Image
             src="/images/default_user_profile.webp"
             alt="프로필 이미지"
             width={0}
             height={0}
-            sizes="100vw"
+            sizes="40px"
             style={{
               width: "70%",
               height: "auto",
@@ -80,10 +85,10 @@ export const Feed = ({
         )}
       </div>
       <div className="flex-1">
-        <div>
+        <div className="text-body2Normal md:text-body1Normal">
           <Link
             href={`/user/${data?.user.userId}`}
-            className="font-semibold text-body1Normal text-slate-900 mr-2"
+            className="font-semibold text-slate-900 mr-2"
           >
             {data?.user.nickname}
           </Link>
