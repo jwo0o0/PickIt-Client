@@ -24,8 +24,8 @@ export const CommentInput = ({ feedId }: { feedId: number }) => {
 
   return (
     <div
-      className="w-full px-4 py-4 md:py-6 absolute bottom-[68px] md:bottom-0 left-0 right-0
-    bg-white flex"
+      className="w-full px-4 pt-4 md:py-6 absolute bottom-[68px] md:bottom-0 left-0 right-0
+    bg-white flex bg-opacity-85"
     >
       <Textarea
         className="bg-slate-200 min-h-[60px] resize-none"
