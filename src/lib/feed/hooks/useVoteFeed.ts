@@ -8,7 +8,7 @@ export const useVoteFeed = () => {
     { feedId: number; pollItem: number }
   >({
     mutationFn: async ({ feedId, pollItem }) => {
-      return await customFetch(`${FEED_API.VOTE_FEED}/${feedId}/vote`, {
+      return await customFetch(FEED_API.VOTE_FEED(feedId), {
         method: "POST",
         body: JSON.stringify({ pollItem }),
       });

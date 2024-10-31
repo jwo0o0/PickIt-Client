@@ -8,21 +8,21 @@ const AUTH_API = {
 };
 
 const IMAGE_API = {
-  PROFILE_UPLOAD: "/image/profile?",
-  FEED_UPLOAD: "/image/feeds?",
+  PROFILE_UPLOAD: (userId: number) => `/image/profile?userId=${userId}`,
+  FEED_UPLOAD: (feedId: number) => `/image/feeds?feedId=${feedId}`,
 };
 
 const USER_API = {
-  GET_USER_PROFILE: "/user/profile",
-  GET_USER_FEEDS: "/user",
+  GET_USER_PROFILE: (userId: number) => `/user/profile/${userId}`,
+  GET_USER_FEEDS: (userId: number) => `/user/${userId}/feeds`,
 };
 
 const FEED_API = {
   POST_FEED: "/feeds",
-  GET_FEED: "/feeds",
-  VOTE_FEED: "/feeds",
-  LIKE_FEED: "/feeds",
-  DELETE_FEED: "/feeds",
+  GET_FEED: (feedId: number) => `/feeds/${feedId}`,
+  VOTE_FEED: (feedId: number) => `/feeds/${feedId}/vote`,
+  LIKE_FEED: (feedId: number) => `/feeds/${feedId}/like`,
+  DELETE_FEED: (feedId: number) => `/feeds/${feedId}`,
   GET_ALL_FEED: (page: number, limit: number) =>
     `/feeds?page=${page}&limit=${limit}`,
 };

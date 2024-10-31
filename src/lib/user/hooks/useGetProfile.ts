@@ -6,7 +6,7 @@ import { UserProfileResponse } from "../userTypes";
 export const getUserProfile = async (
   userId: number
 ): Promise<UserProfileResponse> => {
-  return await customFetch(`${USER_API.GET_USER_PROFILE}/${userId}`, {
+  return await customFetch(USER_API.GET_USER_PROFILE(userId), {
     method: "GET",
   });
 };
