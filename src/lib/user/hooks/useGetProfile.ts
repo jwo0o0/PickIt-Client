@@ -6,11 +6,13 @@ import { UserProfileResponse } from "../userTypes";
 export const getUserProfile = async (
   userId: number
 ): Promise<UserProfileResponse> => {
-  return await customFetch(`${USER_API.GET_USER_PROFILE}/${userId}`);
+  return await customFetch(`${USER_API.GET_USER_PROFILE}/${userId}`, {
+    method: "GET",
+  });
 };
 
 export const useGetProfile = (userId: number) => {
-  return useQuery<UserProfileResponse>({
+  return useQuery<UserProfileResponse, Error>({
     queryKey: userKeys.profile(userId),
     queryFn: () => getUserProfile(userId),
   });
@@ -20,7 +22,7 @@ export const prefetchProfile = async (
   userId: number,
   queryClient: QueryClient
 ) => {
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchQuery<UserProfileResponse, Error>({
     queryKey: userKeys.profile(userId),
     queryFn: () => getUserProfile(userId),
   });
