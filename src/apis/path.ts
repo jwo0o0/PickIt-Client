@@ -27,4 +27,11 @@ const FEED_API = {
     `/feeds?page=${page}&limit=${limit}`,
 };
 
-export { AUTH_API, IMAGE_API, USER_API, FEED_API };
+const COMMENT_API = {
+  POST_COMMENT: (feedId: number) => `/comments/${feedId}`,
+  DELETE_COMMENT: (commentId: number) => `/comments/${commentId}`,
+  GET_ALL_COMMENT: (feedId: number, page: number, limit: number) =>
+    `/comments/${feedId}?page=${page}&limit=${limit}`,
+};
+
+export { AUTH_API, IMAGE_API, USER_API, FEED_API, COMMENT_API };
