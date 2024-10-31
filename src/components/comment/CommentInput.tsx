@@ -3,6 +3,9 @@ import { useRef } from "react";
 import { Textarea } from "../ui/textarea";
 import { usePostComment } from "@/lib/comment/hooks/usePostComment";
 
+import { useQueryClient } from "@tanstack/react-query";
+import commentKeys from "@/lib/comment/hooks/commentQueries";
+
 export const CommentInput = ({ feedId }: { feedId: number }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -12,12 +15,22 @@ export const CommentInput = ({ feedId }: { feedId: number }) => {
     target.style.height = `${target.scrollHeight}px`; // 텍스트에 맞게 높이 조정
   };
 
+  const queryClient = useQueryClient();
   const { mutate: postCommentMutation } = usePostComment();
   const handleClickPost = async () => {
     const content = textAreaRef.current?.value;
     if (!content) return;
 
-    postCommentMutation({ feedId, content });
+    postCommentMutation(
+      { feedId, content },
+      {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({
+            queryKey: commentKeys.feed(feedId),
+          });
+        },
+      }
+    );
     textAreaRef.current!.value = "";
     textAreaRef.current!.style.height = "60px";
   };
