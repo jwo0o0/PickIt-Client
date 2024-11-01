@@ -3,3 +3,10 @@ export interface FollowUserResponse {
   followerUserId: number;
   followingUserId: number;
 }
+
+export interface FollowUserType {
+  userId: number;
+  nickname: string;
+  profileImage: string | null;
+  isFollowing: boolean;
+}
