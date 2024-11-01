@@ -6,7 +6,12 @@ import { useUnfollowUser } from "@/lib/follow/hooks/useUnfollowUser";
 import { useQueryClient } from "@tanstack/react-query";
 import userKeys from "@/lib/user/userQueries";
 
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import { UserProfileResponse } from "@/lib/user/userTypes";
 
 interface FollowButtonsProps {
@@ -69,7 +74,10 @@ export const FollowButtons = ({
                   팔로잉
                 </Button>
               </DrawerTrigger>
-              <DrawerContent className="mx-auto bg-white w-full md:w-[600px] lg:w-[680px]">
+              <DrawerContent
+                aria-describedby={undefined}
+                className="mx-auto bg-white w-full md:w-[600px] lg:w-[680px]"
+              >
                 <div className="w-full flex flex-col items-center justify-center text-slate-900">
                   <div
                     className="w-16 h-16 mt-4 border bg-slate-200 rounded-full
@@ -80,6 +88,7 @@ export const FollowButtons = ({
                         src={`${user?.profileImage}`}
                         alt="프로필 이미지"
                         fill={true}
+                        sizes="64px"
                         className="rounded-full"
                       />
                     ) : (
@@ -88,7 +97,7 @@ export const FollowButtons = ({
                         alt="프로필 이미지"
                         width={0}
                         height={0}
-                        sizes="100vw"
+                        sizes="64px"
                         style={{
                           width: "70%",
                           height: "auto",
@@ -97,10 +106,10 @@ export const FollowButtons = ({
                       />
                     )}
                   </div>
-                  <div className="my-4 text-body2Normal">
+                  <DrawerTitle className="my-4 text-body2Normal">
                     <span className="font-semibold">{user.nickname}</span>
                     님의 팔로우를 취소하시겠어요?
-                  </div>
+                  </DrawerTitle>
                   <Button
                     onClick={handleClickUnFollow}
                     className="w-full border-t py-6 border-slate-300 bg-white rounded-none text-[15px] text-red-400 hover:bg-white"

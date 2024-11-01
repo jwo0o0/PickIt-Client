@@ -60,7 +60,9 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
                   src={`${data?.profileImage}`}
                   alt="프로필 이미지"
                   fill={true}
+                  sizes="64px, (min-width: 768px) 80px"
                   className="rounded-full"
+                  priority={true}
                 />
               ) : (
                 <Image
@@ -68,7 +70,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
                   alt="프로필 이미지"
                   width={0}
                   height={0}
-                  sizes="100vw"
+                  sizes="64px, (min-width: 768px) 80px"
                   style={{
                     width: "70%",
                     height: "auto",
