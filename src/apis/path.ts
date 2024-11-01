@@ -34,4 +34,9 @@ const COMMENT_API = {
     `/comments/${feedId}?page=${page}&limit=${limit}`,
 };
 
-export { AUTH_API, IMAGE_API, USER_API, FEED_API, COMMENT_API };
+const FOLLOW_API = {
+  FOLLOW_USER: (userId: number) => `/follows/${userId}`,
+  UNFOLLOW_USER: (userId: number) => `/follows/${userId}`,
+};
+
+export { AUTH_API, IMAGE_API, USER_API, FEED_API, COMMENT_API, FOLLOW_API };
