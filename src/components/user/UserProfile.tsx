@@ -91,7 +91,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
                 </span>
                 <span className="mr-2">팔로잉</span>
                 <span className="font-medium mr-0.5 md:mr-1">
-                  {data.followings}
+                  {data.followers}
                 </span>
                 <span>팔로워</span>
               </div>
@@ -102,8 +102,9 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
           </div>
           {String(user?.id) !== userIdParam && (
             <FollowButtons
-              userIdParam={userIdParam}
+              userId={Number(userIdParam)}
               isFollowing={data.isFollowing}
+              user={data}
             />
           )}
         </div>
