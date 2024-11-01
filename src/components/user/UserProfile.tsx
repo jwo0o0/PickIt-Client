@@ -16,7 +16,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || !data ? (
         <div className="flex w-full py-4 px-2 md:py-6  border-b border-b-slate-300">
           <Skeleton className="h-12 w-12 rounded-full mr-4" />
           <div className="w-full">
@@ -55,7 +55,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
               className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 border bg-slate-200 rounded-full
           display: flex justify-center items-center overflow-hidden relative"
             >
-              {data?.profileImage ? (
+              {data.profileImage ? (
                 <Image
                   src={`${data?.profileImage}`}
                   alt="프로필 이미지"
@@ -79,7 +79,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
             </div>
             <div className="flex-1">
               <div className="text-headline2 md:text-heading2 font-medium text-slate-900">
-                {data?.nickname}
+                {data.nickname}
               </div>
               <div
                 className="text-slate-700 text-label1Normal md:text-body2Normal
@@ -87,21 +87,24 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
           "
               >
                 <span className="font-medium mr-0.5 md:mr-1">
-                  {data?.followings}
+                  {data.followings}
                 </span>
                 <span className="mr-2">팔로잉</span>
                 <span className="font-medium mr-0.5 md:mr-1">
-                  {data?.followings}
+                  {data.followings}
                 </span>
                 <span>팔로워</span>
               </div>
               <div className="text-slate-800 text-label2Normal md:text-body2Normal text-justify">
-                {data?.bio}
+                {data.bio}
               </div>
             </div>
           </div>
           {String(user?.id) !== userIdParam && (
-            <FollowButtons userIdParam={userIdParam} />
+            <FollowButtons
+              userIdParam={userIdParam}
+              isFollowing={data.isFollowing}
+            />
           )}
         </div>
       )}

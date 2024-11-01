@@ -15,7 +15,11 @@ import { prefetchUserFeeds } from "@/lib/user/hooks/useGetUserFeeds";
 export default async function UserPage({ params }: { params: { id: string } }) {
   const accessToken = cookies().get("accessToken")?.value;
   const queryClient = new QueryClient();
-  await prefetchProfile(Number(params.id), queryClient);
+  await prefetchProfile(Number(params.id), queryClient, {
+    headers: {
+      Cookie: `accessToken=${accessToken}`,
+    },
+  });
   await prefetchUserFeeds(Number(params.id), queryClient, {
     headers: {
       Cookie: `accessToken=${accessToken}`,
