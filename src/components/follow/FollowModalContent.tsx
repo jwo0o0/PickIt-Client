@@ -62,14 +62,22 @@ export const FollowModalContent = ({ userId }: { userId: number }) => {
               <div>{following.length}</div>
             </div>
           </div>
-          <div className="overflow-y-scroll scrollbar-hide">
+          <div className="overflow-y-scroll scrollbar-hide px-[5%]">
             {
               {
                 followers: followers.map((user) => (
-                  <FollowUserProfile key={user.userId} user={user} />
+                  <FollowUserProfile
+                    key={user.userId}
+                    user={user}
+                    profileUserId={userId}
+                  />
                 )),
                 following: following.map((user) => (
-                  <FollowUserProfile key={user.userId} user={user} />
+                  <FollowUserProfile
+                    key={user.userId}
+                    user={user}
+                    profileUserId={userId}
+                  />
                 )),
               }[type]
             }

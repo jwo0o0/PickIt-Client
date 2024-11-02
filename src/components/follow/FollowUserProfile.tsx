@@ -14,7 +14,13 @@ import followKeys from "@/lib/follow/followQueries";
 import { useStore } from "@/store/useStore";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 
-export const FollowUserProfile = ({ user }: { user: FollowUserType }) => {
+export const FollowUserProfile = ({
+  user,
+  profileUserId,
+}: {
+  user: FollowUserType;
+  profileUserId: number;
+}) => {
   const currentUser = useStore(useAuthStore, (state) => state.user);
   const queryClient = useQueryClient();
   const { mutate: followUserMutation } = useFollowUser();
@@ -28,17 +34,17 @@ export const FollowUserProfile = ({ user }: { user: FollowUserType }) => {
       },
       {
         onSuccess: async () => {
-          if (currentUser) {
-            await queryClient.invalidateQueries({
-              queryKey: followKeys.followers(currentUser.id),
-            });
-            await queryClient.invalidateQueries({
-              queryKey: followKeys.following(currentUser.id),
-            });
-            await queryClient.invalidateQueries({
-              queryKey: userKeys.profile(currentUser.id),
-            });
-          }
+          Promise.all([
+            queryClient.invalidateQueries({
+              queryKey: followKeys.followers(profileUserId),
+            }),
+            queryClient.invalidateQueries({
+              queryKey: followKeys.following(profileUserId),
+            }),
+            queryClient.invalidateQueries({
+              queryKey: userKeys.profile(profileUserId),
+            }),
+          ]);
         },
       }
     );
@@ -52,32 +58,35 @@ export const FollowUserProfile = ({ user }: { user: FollowUserType }) => {
       },
       {
         onSuccess: async () => {
-          if (currentUser) {
-            await queryClient.invalidateQueries({
-              queryKey: followKeys.followers(currentUser.id),
-            });
-            await queryClient.invalidateQueries({
-              queryKey: followKeys.following(currentUser.id),
-            });
-            await queryClient.invalidateQueries({
-              queryKey: userKeys.profile(currentUser.id),
-            });
-          }
+          console.log(user.userId);
+          Promise.all([
+            queryClient.invalidateQueries({
+              queryKey: followKeys.followers(profileUserId),
+            }),
+            queryClient.invalidateQueries({
+              queryKey: followKeys.following(profileUserId),
+            }),
+            queryClient.invalidateQueries({
+              queryKey: userKeys.profile(profileUserId),
+            }),
+          ]);
         },
       }
     );
   };
 
   return (
-    <div className="mx-auto w-11/12 my-4 flex items-center text-slate-900">
+    <div className="mx-auto w-full my-4 flex items-center text-slate-900">
       <div className="shrink-0">
         <ProfileImage imageUrl={user.profileImage} sizes="48px" width={12} />
       </div>
       <Link href={`/user/${user.userId}`} className="flex-1 mx-4 font-medium">
         {user.nickname}
       </Link>
-      {user.isFollowing ? (
+      {!currentUser ? null : currentUser.id ===
+        user.userId ? null : user.isFollowing ? (
         <Button
+          size={"default"}
           onClick={handleUnfollow}
           className="h-9 border border-slate-300 bg-slate-50 hover:bg-slate-100 text-slate-900"
         >
@@ -85,6 +94,7 @@ export const FollowUserProfile = ({ user }: { user: FollowUserType }) => {
         </Button>
       ) : (
         <Button
+          size={"default"}
           onClick={handleFollow}
           className="h-9 bg-indigo-500 hover:bg-indigo-600"
         >

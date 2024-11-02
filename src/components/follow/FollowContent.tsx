@@ -47,10 +47,18 @@ export const FollowContent = ({ userId }: { userId: number }) => {
         {
           {
             followers: followers.map((user) => (
-              <FollowUserProfile key={user.userId} user={user} />
+              <FollowUserProfile
+                key={user.userId}
+                user={user}
+                profileUserId={userId}
+              />
             )),
             following: following.map((user) => (
-              <FollowUserProfile key={user.userId} user={user} />
+              <FollowUserProfile
+                key={user.userId}
+                user={user}
+                profileUserId={userId}
+              />
             )),
           }[type]
         }
