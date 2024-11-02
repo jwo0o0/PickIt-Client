@@ -1,9 +1,9 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
+import { ProfileImage } from "../common/ProfileImage";
 import { Skeleton } from "../ui/skeleton";
 import { FollowButtons } from "./FollowButtons";
-import { useStore } from "zustand";
+import { useStore } from "@/store/useStore";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useGetProfile } from "@/lib/user/hooks/useGetProfile";
 
@@ -16,7 +16,7 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || !data ? (
         <div className="flex w-full py-4 px-2 md:py-6  border-b border-b-slate-300">
           <Skeleton className="h-12 w-12 rounded-full mr-4" />
           <div className="w-full">
@@ -51,57 +51,53 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
             </Link>
           )}
           <div id="userInfo" className="w-full flex">
-            <div
-              className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 border bg-slate-200 rounded-full
-          display: flex justify-center items-center overflow-hidden relative"
-            >
-              {data?.profileImage ? (
-                <Image
-                  src={`${data?.profileImage}`}
-                  alt="프로필 이미지"
-                  fill={true}
-                  className="rounded-full"
-                />
-              ) : (
-                <Image
-                  src="/images/default_user_profile.webp"
-                  alt="프로필 이미지"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{
-                    width: "70%",
-                    height: "auto",
-                  }}
-                  priority={true}
-                />
-              )}
+            <div className="mr-4 md:mr-6">
+              <ProfileImage
+                imageUrl={data.profileImage}
+                width={16}
+                mdWidth={20}
+                sizes="64px, (min-width: 768px) 80px"
+              />
             </div>
             <div className="flex-1">
               <div className="text-headline2 md:text-heading2 font-medium text-slate-900">
-                {data?.nickname}
+                {data.nickname}
               </div>
               <div
                 className="text-slate-700 text-label1Normal md:text-body2Normal
           mt-2 mb-2 md:mt-3 md:mb-3
           "
               >
-                <span className="font-medium mr-0.5 md:mr-1">
-                  {data?.followings}
-                </span>
-                <span className="mr-2">팔로잉</span>
-                <span className="font-medium mr-0.5 md:mr-1">
-                  {data?.followings}
-                </span>
-                <span>팔로워</span>
+                <Link
+                  href={`/user/${userIdParam}/follows?type=followers`}
+                  className="hover:text-slate-900 hover:underline"
+                >
+                  <span className="font-medium mr-0.5 md:mr-1">
+                    {data.followers}
+                  </span>
+                  <span className="mr-2">팔로워</span>
+                </Link>
+                <Link
+                  href={`/user/${userIdParam}/follows?type=following`}
+                  className="hover:text-slate-900 hover:underline"
+                >
+                  <span className="font-medium mr-0.5 md:mr-1">
+                    {data.followings}
+                  </span>
+                  <span>팔로잉</span>
+                </Link>
               </div>
               <div className="text-slate-800 text-label2Normal md:text-body2Normal text-justify">
-                {data?.bio}
+                {data.bio}
               </div>
             </div>
           </div>
           {String(user?.id) !== userIdParam && (
-            <FollowButtons userIdParam={userIdParam} />
+            <FollowButtons
+              userId={Number(userIdParam)}
+              isFollowing={data.isFollowing}
+              user={data}
+            />
           )}
         </div>
       )}

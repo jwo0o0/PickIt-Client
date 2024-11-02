@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { ProfileImage } from "@/components/common/ProfileImage";
 
 import { FeedType } from "@/lib/feed/feedTypes";
 import { useQueryClient } from "@tanstack/react-query";
@@ -58,31 +59,8 @@ export const Feed = ({
 
   return (
     <div className="relative flex h-fit">
-      <div
-        id="profileImage"
-        className="shrink-0 w-10 h-10 mr-4 border bg-slate-200 rounded-full
-          display: flex justify-center items-center overflow-hidden relative"
-      >
-        {data?.user.profileImage ? (
-          <Image
-            src={data.user.profileImage}
-            alt="프로필 이미지"
-            fill={true}
-            sizes="40px"
-          />
-        ) : (
-          <Image
-            src="/images/default_user_profile.webp"
-            alt="프로필 이미지"
-            width={0}
-            height={0}
-            sizes="40px"
-            style={{
-              width: "70%",
-              height: "auto",
-            }}
-          />
-        )}
+      <div id="profileImage" className="shrink-0 mr-4 relative">
+        <ProfileImage imageUrl={data?.user.profileImage} sizes="40px" />
       </div>
       <div className="flex-1">
         <div className="text-body2Normal md:text-body1Normal">

@@ -9,4 +9,5 @@ export interface UserProfileResponse {
   profileImage: string;
   followers: number;
   followings: number;
+  isFollowing: boolean;
 }
