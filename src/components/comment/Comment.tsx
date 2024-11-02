@@ -4,7 +4,7 @@ import Image from "next/image";
 import Dropdown from "@/components/common/Dropdown";
 
 import { useAuthStore } from "@/store/auth/useAuthStore";
-import { useStore } from "zustand";
+import { useStore } from "@/store/useStore";
 import { CommentType } from "@/lib/comment/commentTypes";
 
 import { useQueryClient } from "@tanstack/react-query";

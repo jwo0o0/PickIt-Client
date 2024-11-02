@@ -4,7 +4,7 @@ import { Feed } from "../feed/Feed";
 import Dropdown from "@/components/common/Dropdown";
 
 import { useAuthStore } from "@/store/auth/useAuthStore";
-import { useStore } from "zustand";
+import { useStore } from "@/store/useStore";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetUserFeeds } from "@/lib/user/hooks/useGetUserFeeds";

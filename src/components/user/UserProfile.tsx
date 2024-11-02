@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
 import { FollowButtons } from "./FollowButtons";
-import { useStore } from "zustand";
+import { useStore } from "@/store/useStore";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useGetProfile } from "@/lib/user/hooks/useGetProfile";
 
@@ -88,14 +88,24 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
           mt-2 mb-2 md:mt-3 md:mb-3
           "
               >
-                <span className="font-medium mr-0.5 md:mr-1">
-                  {data.followings}
-                </span>
-                <span className="mr-2">팔로잉</span>
-                <span className="font-medium mr-0.5 md:mr-1">
-                  {data.followers}
-                </span>
-                <span>팔로워</span>
+                <Link
+                  href={`/user/${userIdParam}/follows?type=followers`}
+                  className="hover:text-slate-900 hover:underline"
+                >
+                  <span className="font-medium mr-0.5 md:mr-1">
+                    {data.followers}
+                  </span>
+                  <span className="mr-2">팔로워</span>
+                </Link>
+                <Link
+                  href={`/user/${userIdParam}/follows?type=following`}
+                  className="hover:text-slate-900 hover:underline"
+                >
+                  <span className="font-medium mr-0.5 md:mr-1">
+                    {data.followings}
+                  </span>
+                  <span>팔로잉</span>
+                </Link>
               </div>
               <div className="text-slate-800 text-label2Normal md:text-body2Normal text-justify">
                 {data.bio}
