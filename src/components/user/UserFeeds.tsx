@@ -51,13 +51,7 @@ export const UserFeeds = ({ userIdParam }: UserFeedsProps) => {
               hadleClickEdit={() => {}}
             />
           )}
-          <div
-            onClick={() => {
-              router.push(`/feed/${feed.feedId}`);
-            }}
-          >
-            <Feed feedId={feed.feedId} data={feed} />
-          </div>
+          <Feed feedId={feed.feedId} data={feed} />
         </div>
       ))}
     </>

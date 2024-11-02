@@ -43,9 +43,6 @@ export default function FeedList() {
         {feeds.map((feed) => (
           <div
             key={feed.feedId}
-            onClick={() => {
-              router.push(`/feed/${feed.feedId}`);
-            }}
             className="my-4 pb-6 border-b border-b-slate-300"
           >
             <Feed feedId={feed.feedId} data={feed} />
