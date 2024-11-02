@@ -3,18 +3,22 @@ import Image from "next/image";
 export const ProfileImage = ({
   imageUrl,
   width,
-  mdWidth,
   sizes,
 }: {
   imageUrl: string | null | undefined;
   width?: number;
-  mdWidth?: number;
   sizes: string;
 }) => {
+  const size: { [key: number]: string } = {
+    10: "w-10 h-10",
+    12: "w-12 h-12",
+    16: "w-16 h-16",
+    20: "w-20 h-20",
+  };
   return (
     <div
-      className={`w-${width || "10"} h-${width || 10} ${
-        mdWidth ? "md:w-" + mdWidth + " md:h-" + mdWidth : ""
+      className={`${
+        width ? size[width] : "w-10 h-10"
       } border bg-slate-200 rounded-full
       display: flex justify-center items-center overflow-hidden relative`}
     >
