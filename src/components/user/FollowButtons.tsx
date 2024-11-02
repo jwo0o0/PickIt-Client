@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ProfileImage } from "../common/ProfileImage";
 import { Button } from "@/components/ui/button";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useFollowUser } from "@/lib/follow/hooks/useFollowUser";
@@ -79,32 +79,12 @@ export const FollowButtons = ({
                 className="mx-auto bg-white w-full md:w-[600px] lg:w-[680px]"
               >
                 <div className="w-full flex flex-col items-center justify-center text-slate-900">
-                  <div
-                    className="w-16 h-16 mt-4 border bg-slate-200 rounded-full
-          display: flex justify-center items-center overflow-hidden relative"
-                  >
-                    {user.profileImage ? (
-                      <Image
-                        src={`${user?.profileImage}`}
-                        alt="프로필 이미지"
-                        fill={true}
-                        sizes="64px"
-                        className="rounded-full"
-                      />
-                    ) : (
-                      <Image
-                        src="/images/default_user_profile.webp"
-                        alt="프로필 이미지"
-                        width={0}
-                        height={0}
-                        sizes="64px"
-                        style={{
-                          width: "70%",
-                          height: "auto",
-                        }}
-                        priority={true}
-                      />
-                    )}
+                  <div className="mt-4">
+                    <ProfileImage
+                      imageUrl={user.profileImage}
+                      width={16}
+                      sizes="64px"
+                    />
                   </div>
                   <DrawerTitle className="my-4 text-body2Normal">
                     <span className="font-semibold">{user.nickname}</span>

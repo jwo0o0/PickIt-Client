@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
-import { FollowUserType } from "@/lib/follow/followTypes";
+
+import { ProfileImage } from "../common/ProfileImage";
 import { Button } from "../ui/button";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useFollowUser } from "@/lib/follow/hooks/useFollowUser";
 import { useUnfollowUser } from "@/lib/follow/hooks/useUnfollowUser";
+import { FollowUserType } from "@/lib/follow/followTypes";
 import userKeys from "@/lib/user/userQueries";
 import followKeys from "@/lib/follow/followQueries";
 
@@ -69,30 +70,8 @@ export const FollowUserProfile = ({ user }: { user: FollowUserType }) => {
 
   return (
     <div className="mx-auto w-11/12 my-4 flex items-center text-slate-900">
-      <div className="shrink-0 w-12 h-12 border bg-slate-200 rounded-full display: flex justify-center items-center overflow-hidden relative">
-        {user.profileImage ? (
-          <Image
-            src={`${user?.profileImage}`}
-            alt="프로필 이미지"
-            fill={true}
-            sizes="48px"
-            className="rounded-full"
-            priority={true}
-          />
-        ) : (
-          <Image
-            src="/images/default_user_profile.webp"
-            alt="프로필 이미지"
-            width={0}
-            height={0}
-            sizes="48px"
-            style={{
-              width: "70%",
-              height: "auto",
-            }}
-            priority={true}
-          />
-        )}
+      <div className="shrink-0">
+        <ProfileImage imageUrl={user.profileImage} sizes="48px" width={12} />
       </div>
       <Link href={`/user/${user.userId}`} className="flex-1 mx-4 font-medium">
         {user.nickname}

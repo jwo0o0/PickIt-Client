@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
+import { ProfileImage } from "../common/ProfileImage";
 import { Skeleton } from "../ui/skeleton";
 import { FollowButtons } from "./FollowButtons";
 import { useStore } from "@/store/useStore";
@@ -51,33 +51,13 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
             </Link>
           )}
           <div id="userInfo" className="w-full flex">
-            <div
-              className="w-16 h-16 md:w-20 md:h-20 mr-4 md:mr-6 border bg-slate-200 rounded-full
-          display: flex justify-center items-center overflow-hidden relative"
-            >
-              {data.profileImage ? (
-                <Image
-                  src={`${data?.profileImage}`}
-                  alt="프로필 이미지"
-                  fill={true}
-                  sizes="64px, (min-width: 768px) 80px"
-                  className="rounded-full"
-                  priority={true}
-                />
-              ) : (
-                <Image
-                  src="/images/default_user_profile.webp"
-                  alt="프로필 이미지"
-                  width={0}
-                  height={0}
-                  sizes="64px, (min-width: 768px) 80px"
-                  style={{
-                    width: "70%",
-                    height: "auto",
-                  }}
-                  priority={true}
-                />
-              )}
+            <div className="mr-4 md:mr-6">
+              <ProfileImage
+                imageUrl={data.profileImage}
+                width={16}
+                mdWidth={20}
+                sizes="64px, (min-width: 768px) 80px"
+              />
             </div>
             <div className="flex-1">
               <div className="text-headline2 md:text-heading2 font-medium text-slate-900">

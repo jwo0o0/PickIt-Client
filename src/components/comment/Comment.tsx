@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import Dropdown from "@/components/common/Dropdown";
+import { ProfileImage } from "../common/ProfileImage";
 
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useStore } from "@/store/useStore";
@@ -47,31 +47,8 @@ export const Comment = ({ data, feedId }: CommentProps) => {
           hadleClickEdit={() => {}}
         />
       )}
-      <div
-        id="profileImage"
-        className="w-10 h-10 mr-4 shrink-0 rounded-full border bg-slate-200
-      flex justify-center items-center overflow-hidden relative"
-      >
-        {data.user.profileImage ? (
-          <Image
-            src={data.user.profileImage}
-            alt="프로필 이미지"
-            fill={true}
-            sizes="40px"
-          />
-        ) : (
-          <Image
-            src="/images/default_user_profile.webp"
-            alt="프로필 이미지"
-            width={0}
-            height={0}
-            sizes="40px"
-            style={{
-              width: "70%",
-              height: "auto",
-            }}
-          />
-        )}
+      <div id="profileImage" className="mr-4 shrink-0">
+        <ProfileImage imageUrl={data.user.profileImage} sizes="40px" />
       </div>
       <div className="flex-1">
         <div className="text-body2Normal md:text-body1Normal">
