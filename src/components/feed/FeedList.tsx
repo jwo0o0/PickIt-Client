@@ -1,14 +1,15 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { Feed } from "./Feed";
 
 import { useGetAllFeed } from "@/lib/feed/hooks/useGetAllFeed";
 import { useEffect, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import feedKeys from "@/lib/feed/feedQueries";
 
 export default function FeedList() {
-  const router = useRouter();
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
+  const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAllFeed();
 
@@ -35,6 +36,12 @@ export default function FeedList() {
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  const handleVoteLikeSuccess = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: feedKeys.all,
+    });
+  };
+
   const feeds = data ? data.pages.flatMap((page) => page.feeds) : [];
 
   return (
@@ -45,7 +52,12 @@ export default function FeedList() {
             key={feed.feedId}
             className="my-4 pb-6 border-b border-b-slate-300"
           >
-            <Feed feedId={feed.feedId} data={feed} />
+            <Feed
+              feedId={feed.feedId}
+              data={feed}
+              handleLikeSuccess={handleVoteLikeSuccess}
+              handleVoteSuccess={handleVoteLikeSuccess}
+            />
           </div>
         ))}
         <div ref={loadMoreRef}>

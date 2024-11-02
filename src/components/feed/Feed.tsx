@@ -12,13 +12,18 @@ import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import timeAgo from "@/utils/timeAgo";
 
+interface FeedProps {
+  feedId: number;
+  data: FeedType | undefined;
+  handleVoteSuccess?: () => Promise<void>;
+  handleLikeSuccess?: () => Promise<void>;
+}
 export const Feed = ({
   feedId,
   data,
-}: {
-  feedId: number;
-  data: FeedType | undefined;
-}) => {
+  handleVoteSuccess,
+  handleLikeSuccess,
+}: FeedProps) => {
   const router = useRouter();
   const { isLogin, isLoading } = useLoginStatus();
 
@@ -36,9 +41,13 @@ export const Feed = ({
       { feedId, pollItem: item },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
-            queryKey: feedKeys.content(feedId),
-          });
+          if (handleVoteSuccess) {
+            await handleVoteSuccess();
+          } else {
+            await queryClient.invalidateQueries({
+              queryKey: feedKeys.content(feedId),
+            });
+          }
         },
       }
     );
@@ -51,9 +60,13 @@ export const Feed = ({
       { feedId },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
-            queryKey: feedKeys.content(feedId),
-          });
+          if (handleLikeSuccess) {
+            await handleLikeSuccess();
+          } else {
+            await queryClient.invalidateQueries({
+              queryKey: feedKeys.content(feedId),
+            });
+          }
         },
       }
     );
