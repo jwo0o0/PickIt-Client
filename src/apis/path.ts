@@ -41,4 +41,18 @@ const FOLLOW_API = {
   GET_FOLLOWERS: (userId: number) => `/follows/${userId}/followers`,
 };
 
-export { AUTH_API, IMAGE_API, USER_API, FEED_API, COMMENT_API, FOLLOW_API };
+const CHAT_API = {
+  GET_CHATROOMS: "/chat/rooms",
+  GET_MESSAGES: (roomId: number) => `/chat/messages/${roomId}`,
+  POST_CHAT: (roomId: number) => `/chat/room/${roomId}`,
+};
+
+export {
+  AUTH_API,
+  IMAGE_API,
+  USER_API,
+  FEED_API,
+  COMMENT_API,
+  FOLLOW_API,
+  CHAT_API,
+};

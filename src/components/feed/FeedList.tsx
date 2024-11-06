@@ -1,19 +1,21 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { Feed } from "./Feed";
 
 import { useGetAllFeed } from "@/lib/feed/hooks/useGetAllFeed";
 import { useEffect, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import feedKeys from "@/lib/feed/feedQueries";
 
 export default function FeedList() {
-  const router = useRouter();
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
+  const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetAllFeed();
 
   useEffect(() => {
     if (isFetchingNextPage) return;
+    const targetRef = loadMoreRef.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,16 +26,22 @@ export default function FeedList() {
       { threshold: 1 }
     );
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+    if (targetRef) {
+      observer.observe(targetRef);
     }
 
     return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
+      if (targetRef) {
+        observer.unobserve(targetRef);
       }
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const handleVoteLikeSuccess = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: feedKeys.all,
+    });
+  };
 
   const feeds = data ? data.pages.flatMap((page) => page.feeds) : [];
 
@@ -43,12 +51,14 @@ export default function FeedList() {
         {feeds.map((feed) => (
           <div
             key={feed.feedId}
-            onClick={() => {
-              router.push(`/feed/${feed.feedId}`);
-            }}
             className="my-4 pb-6 border-b border-b-slate-300"
           >
-            <Feed feedId={feed.feedId} data={feed} />
+            <Feed
+              feedId={feed.feedId}
+              data={feed}
+              handleLikeSuccess={handleVoteLikeSuccess}
+              handleVoteSuccess={handleVoteLikeSuccess}
+            />
           </div>
         ))}
         <div ref={loadMoreRef}>

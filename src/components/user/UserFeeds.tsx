@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { Feed } from "../feed/Feed";
 import Dropdown from "@/components/common/Dropdown";
 
@@ -15,8 +14,6 @@ interface UserFeedsProps {
   userIdParam: string;
 }
 export const UserFeeds = ({ userIdParam }: UserFeedsProps) => {
-  const router = useRouter();
-
   const user = useStore(useAuthStore, (state) => state.user);
   const { data } = useGetUserFeeds(Number(userIdParam));
 
@@ -36,6 +33,12 @@ export const UserFeeds = ({ userIdParam }: UserFeedsProps) => {
     );
   };
 
+  const handleVoteLikeSuccess = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: userKeys.feeds(Number(userIdParam)),
+    });
+  };
+
   return (
     <>
       {data?.map((feed) => (
@@ -51,13 +54,12 @@ export const UserFeeds = ({ userIdParam }: UserFeedsProps) => {
               hadleClickEdit={() => {}}
             />
           )}
-          <div
-            onClick={() => {
-              router.push(`/feed/${feed.feedId}`);
-            }}
-          >
-            <Feed feedId={feed.feedId} data={feed} />
-          </div>
+          <Feed
+            feedId={feed.feedId}
+            data={feed}
+            handleLikeSuccess={handleVoteLikeSuccess}
+            handleVoteSuccess={handleVoteLikeSuccess}
+          />
         </div>
       ))}
     </>

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ProfileImage } from "@/components/common/ProfileImage";
 
 import { FeedType } from "@/lib/feed/feedTypes";
@@ -11,13 +12,19 @@ import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import timeAgo from "@/utils/timeAgo";
 
+interface FeedProps {
+  feedId: number;
+  data: FeedType | undefined;
+  handleVoteSuccess?: () => Promise<void>;
+  handleLikeSuccess?: () => Promise<void>;
+}
 export const Feed = ({
   feedId,
   data,
-}: {
-  feedId: number;
-  data: FeedType | undefined;
-}) => {
+  handleVoteSuccess,
+  handleLikeSuccess,
+}: FeedProps) => {
+  const router = useRouter();
   const { isLogin, isLoading } = useLoginStatus();
 
   const queryClient = useQueryClient();
@@ -34,9 +41,13 @@ export const Feed = ({
       { feedId, pollItem: item },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
-            queryKey: feedKeys.content(feedId),
-          });
+          if (handleVoteSuccess) {
+            await handleVoteSuccess();
+          } else {
+            await queryClient.invalidateQueries({
+              queryKey: feedKeys.content(feedId),
+            });
+          }
         },
       }
     );
@@ -49,16 +60,25 @@ export const Feed = ({
       { feedId },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries({
-            queryKey: feedKeys.content(feedId),
-          });
+          if (handleLikeSuccess) {
+            await handleLikeSuccess();
+          } else {
+            await queryClient.invalidateQueries({
+              queryKey: feedKeys.content(feedId),
+            });
+          }
         },
       }
     );
   };
 
   return (
-    <div className="relative flex h-fit">
+    <div
+      onClick={() => {
+        router.push(`/feed/${feedId}`);
+      }}
+      className="relative flex h-fit"
+    >
       <div id="profileImage" className="shrink-0 mr-4 relative">
         <ProfileImage imageUrl={data?.user.profileImage} sizes="40px" />
       </div>
@@ -67,6 +87,9 @@ export const Feed = ({
           <Link
             href={`/user/${data?.user.userId}`}
             className="font-semibold text-slate-900 mr-2"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             {data?.user.nickname}
           </Link>
@@ -129,7 +152,10 @@ export const Feed = ({
             {data?.polls.map((option, idx) => {
               return (
                 <div
-                  onClick={() => handleClickVote(idx)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClickVote(idx);
+                  }}
                   key={idx}
                   className="my-2 h-9 border border-indigo-500 rounded-lg text-center text-body2Normal leading-9 text-indigo-500 font-semibold
               hover:bg-indigo-50 cursor-pointer"
@@ -144,7 +170,10 @@ export const Feed = ({
         <div className="flex items-center text-slate-600">
           <button
             disabled={!isLoading && !isLogin}
-            onClick={handleClickLike}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClickLike();
+            }}
             className="mr-1"
           >
             {data?.isLiked ? (

@@ -51,11 +51,10 @@ export const UserProfile = ({ userIdParam }: UserProfileProps) => {
             </Link>
           )}
           <div id="userInfo" className="w-full flex">
-            <div className="mr-4 md:mr-6">
+            <div className="mr-4">
               <ProfileImage
                 imageUrl={data.profileImage}
                 width={16}
-                mdWidth={20}
                 sizes="64px, (min-width: 768px) 80px"
               />
             </div>

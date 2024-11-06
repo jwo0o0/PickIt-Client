@@ -17,7 +17,9 @@ export const refreshAccessToken = async (): Promise<Response> => {
   });
   if (!response.ok) {
     const errorData = await response.json();
-    customFetch(AUTH_API.LOGOUT);
+    customFetch(AUTH_API.LOGOUT, {
+      method: "POST",
+    });
     setCookie("isLogin", "false", { httpOnly: false, path: "/" });
     throw new Error(errorData?.message || "토큰 갱신 실패");
   }
