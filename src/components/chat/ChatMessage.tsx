@@ -42,3 +42,5 @@ export const ChatMessage = memo(
     );
   }
 );
+
+ChatMessage.displayName = "ChatMessage";

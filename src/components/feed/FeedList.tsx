@@ -15,6 +15,7 @@ export default function FeedList() {
 
   useEffect(() => {
     if (isFetchingNextPage) return;
+    const targetRef = loadMoreRef.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -25,13 +26,13 @@ export default function FeedList() {
       { threshold: 1 }
     );
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+    if (targetRef) {
+      observer.observe(targetRef);
     }
 
     return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
+      if (targetRef) {
+        observer.unobserve(targetRef);
       }
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);

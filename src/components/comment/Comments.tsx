@@ -13,6 +13,7 @@ export const Comments = ({ feedId }: { feedId: number }) => {
 
   useEffect(() => {
     if (isFetchingNextPage) return;
+    const targetRef = loadMoreRef.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,13 +24,13 @@ export const Comments = ({ feedId }: { feedId: number }) => {
       { threshold: 1 }
     );
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+    if (targetRef) {
+      observer.observe(targetRef);
     }
 
     return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
+      if (targetRef) {
+        observer.unobserve(targetRef);
       }
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);

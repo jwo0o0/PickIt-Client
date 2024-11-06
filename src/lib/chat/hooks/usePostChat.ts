@@ -23,7 +23,7 @@ export const usePostChat = () => {
     try {
       const { roomId } = await fetchPostChat(partnerId);
       router.push(`/chat/${roomId}`);
-    } catch (error) {
+    } catch {
       alert("채팅방에 접속할 수 없습니다.");
     } finally {
       setIsLoading(false);
