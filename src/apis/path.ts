@@ -43,6 +43,8 @@ const FOLLOW_API = {
 
 const CHAT_API = {
   GET_CHATROOMS: "/chat/rooms",
+  GET_MESSAGES: (roomId: number) => `/chat/messages/${roomId}`,
+  POST_CHAT: (roomId: number) => `/chat/room/${roomId}`,
 };
 
 export {
