@@ -5,6 +5,7 @@ import { useFollowUser } from "@/lib/follow/hooks/useFollowUser";
 import { useUnfollowUser } from "@/lib/follow/hooks/useUnfollowUser";
 import { useQueryClient } from "@tanstack/react-query";
 import userKeys from "@/lib/user/userQueries";
+import { usePostChat } from "@/lib/chat/hooks/usePostChat";
 
 import {
   Drawer,
@@ -25,6 +26,7 @@ export const FollowButtons = ({
   user,
 }: FollowButtonsProps) => {
   const { isLogin, isLoading } = useLoginStatus();
+  const { handleClickChat, isChatLoading } = usePostChat();
 
   const queryClient = useQueryClient();
   const { mutate: followUserMutation } = useFollowUser();
@@ -109,6 +111,9 @@ export const FollowButtons = ({
             </Button>
           )}
           <Button
+            onClick={() => {
+              handleClickChat(userId);
+            }}
             className="w-6/12 h-8 ml-1 
       text-slate-900 bg-slate-50 border border-slate-300 hover:bg-slate-100"
           >
