@@ -16,6 +16,10 @@ export const ChatRoom = ({ roomId }: { roomId: number }) => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+  }, []);
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
