@@ -16,6 +16,7 @@ export const useGetChatRooms = () => {
   return useQuery<ChatRoomListType[], Error>({
     queryKey: chatKeys.rooms,
     queryFn: getChatRooms,
+    refetchOnMount: "always",
   });
 };
 

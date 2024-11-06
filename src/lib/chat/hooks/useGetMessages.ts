@@ -17,7 +17,6 @@ export const useGetMessages = (roomId: number) => {
   return useQuery<GetMessagesResponseType, Error>({
     queryKey: chatKeys.messages(roomId),
     queryFn: () => getMessages(roomId),
-    refetchOnMount: "always",
   });
 };
 
