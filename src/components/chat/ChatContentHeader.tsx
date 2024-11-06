@@ -1,16 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { ProfileImage } from "../common/ProfileImage";
 
-interface ContentHeaderProps {
+interface ChatContentHeaderProps {
   title: string;
   button?: string;
   onClickButton?: () => void;
+  profileImage?: string | null;
 }
-export const ContentHeader = ({
+export const ChatContentHeader = ({
   title,
   button,
   onClickButton,
-}: ContentHeaderProps) => {
+  profileImage,
+}: ChatContentHeaderProps) => {
   const router = useRouter();
   return (
     <div
@@ -42,6 +45,9 @@ export const ContentHeader = ({
           />
         </svg>
       </button>
+      <div className="ml-2">
+        <ProfileImage imageUrl={profileImage} width={12} sizes="48px" />
+      </div>
       <div className="ml-4 text-slate-900 font-semibold">{title}</div>
       <button
         className="absolute right-4 p-2 font-semibold text-slate-900"
