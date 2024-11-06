@@ -87,6 +87,9 @@ export const Feed = ({
           <Link
             href={`/user/${data?.user.userId}`}
             className="font-semibold text-slate-900 mr-2"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             {data?.user.nickname}
           </Link>
