@@ -23,7 +23,7 @@ export default async function FeedPage({ params }: { params: { id: string } }) {
   return (
     <>
       <ContentHeader title="" />
-      <div className="pt-24 h-screen overflow-y-scroll scrollbar-hide">
+      <div className="pt-24 full-viewport-height overflow-y-scroll scrollbar-hide">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <FeedContent feedId={Number(params.id)} />
         </HydrationBoundary>

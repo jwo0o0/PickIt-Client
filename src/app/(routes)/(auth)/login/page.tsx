@@ -56,7 +56,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
+    <div className="full-viewport-height flex flex-col justify-center items-center">
       <div className="mb-6 text-headline1 font-bold text-slate-900">
         로그인 하기
       </div>
