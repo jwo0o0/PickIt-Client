@@ -9,7 +9,7 @@ export const ChatRoomList = () => {
   const { handleClickChat, isChatLoading } = usePostChat();
 
   return (
-    <div className="w-full h-full pt-16 overflow-y-scroll scrollbar-hide">
+    <div className="w-full h-full pt-12 overflow-y-scroll scrollbar-hide">
       {data?.map((room) => (
         <div
           onClick={() => {

@@ -29,7 +29,7 @@ export default async function UserPage({ params }: { params: { id: string } }) {
   return (
     <>
       <ContentHeader title="" />
-      <div className="pt-20 pb-10 h-full overflow-y-scroll scrollbar-hide">
+      <div className="pt-12 pb-10 h-full overflow-y-scroll scrollbar-hide">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <UserProfile userIdParam={params.id} />
           <UserFeeds userIdParam={params.id} />

@@ -6,7 +6,7 @@ export const UserSettingsContents = () => {
   const { mutate: logout } = useLogout();
 
   return (
-    <div className="mt-28">
+    <div className="mt-20">
       <button
         className="w-full flex justify-between px-4 py-2
         bg-white hover:bg-white text-slate-900 text-md font-medium"
