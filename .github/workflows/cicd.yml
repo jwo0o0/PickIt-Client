@@ -10,14 +10,19 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Pull latest code
+        working-directory: /home/ubuntu/SNS_Project
+        run: |
+          git pull origin main
 
       - name: Install dependencies
+        working-directory: /home/ubuntu/SNS_Project
         run: npm install
 
       - name: Build project
+        working-directory: /home/ubuntu/SNS_Project
         run: npm run build
 
       - name: Restart application with PM2
+        working-directory: /home/ubuntu/SNS_Project
         run: pm2 restart sns_client || pm2 start npm --name sns_client -- start
