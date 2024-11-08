@@ -1,7 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { AuthStore } from "./types";
 import { User } from "@/lib/auth/authTypes";
+
+export interface AuthStore {
+  user: User | null;
+  setUser: (user: User) => void;
+  logout: () => void;
+}
 
 export const useAuthStore = create<AuthStore>()(
   persist(
