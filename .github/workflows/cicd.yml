@@ -7,22 +7,26 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Pull latest code
-        working-directory: /home/ubuntu/SNS_Project
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH and deploy
+        env:
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          git pull origin main
-
-      - name: Install dependencies
-        working-directory: /home/ubuntu/SNS_Project
-        run: npm install
-
-      - name: Build project
-        working-directory: /home/ubuntu/SNS_Project
-        run: npm run build
-
-      - name: Restart application with PM2
-        working-directory: /home/ubuntu/SNS_Project
-        run: pm2 restart sns_client || pm2 start npm --name sns_client -- start
+          echo "$SSH_PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
+            cd /home/ubuntu/SNS_Project
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart sns_client || pm2 start npm --name sns_client -- start
+          EOF
+          rm private_key.pem
+        shell: bash
