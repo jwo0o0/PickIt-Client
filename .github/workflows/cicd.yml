@@ -7,15 +7,11 @@ on:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, ec2]
+    runs-on: ec2
 
     steps:
-      - name: Navigate to application directory
-        run: cd /home/ubuntu/SNS_Project
-
       - name: Checkout code
-        run: |
-          git pull origin main
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
