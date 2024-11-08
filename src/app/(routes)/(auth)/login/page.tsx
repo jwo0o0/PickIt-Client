@@ -28,7 +28,7 @@ export default function LoginPage() {
     },
   });
   const setUser = useAuthStore((state) => state.setUser);
-  const { mutate: loginMutation, isError, error } = useLogin();
+  const { mutate: loginMutation, isError, error, isPending } = useLogin();
 
   const onSubmit = (values: LoginPayload) => {
     loginMutation(
@@ -102,9 +102,12 @@ export default function LoginPage() {
           )}
           <Button
             type="submit"
-            className={`w-80 mt-8 bg-indigo-500 hover:bg-indigo-600`}
+            disabled={isPending}
+            className={`w-80 mt-8 ${
+              isPending ? "bg-indigo-400" : "bg-indigo-500"
+            } hover:bg-indigo-600`}
           >
-            로그인
+            {isPending ? "로그인 중..." : "로그인"}
           </Button>
         </form>
       </Form>
