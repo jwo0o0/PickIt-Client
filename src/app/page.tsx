@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
 import { LoginButton } from "@/components/layout/LoginButton";
-import { LoginBanner } from "@/components/layout/LoginBanner";
 import FeedList from "@/components/feed/FeedList";
 
 import {
@@ -24,7 +23,6 @@ export default async function Home() {
     <>
       <NavbarWrapper />
       <LoginButton />
-      <LoginBanner />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <FeedList />
       </HydrationBoundary>

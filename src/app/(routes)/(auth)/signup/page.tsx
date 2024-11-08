@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useSignup } from "@/lib/auth/hooks/useSignup";
 import { setCookie } from "cookies-next";
+import formatErrorMessage from "@/apis/formatError";
 
 export default function SignupPage() {
   const { setUser } = useAuthStore();
@@ -33,7 +34,7 @@ export default function SignupPage() {
   });
   const { setValue } = form;
 
-  const { mutate: signupMutation, isPending } = useSignup();
+  const { mutate: signupMutation, isPending, error, isError } = useSignup();
 
   const onSubmit = (values: SignupPayload) => {
     signupMutation(
@@ -54,9 +55,6 @@ export default function SignupPage() {
             path: "/",
           });
           window.location.href = "/";
-        },
-        onError: () => {
-          alert("회원가입에 실패했습니다.");
         },
       }
     );
@@ -167,6 +165,12 @@ export default function SignupPage() {
                 </FormItem>
               )}
             />
+            {isError && (
+              <FormMessage className="mt-2 text-slate-700">
+                {formatErrorMessage(error?.message)}
+              </FormMessage>
+            )}
+
             <Button
               type="submit"
               className={`w-80 mt-8 hover:bg-slate-800 ${

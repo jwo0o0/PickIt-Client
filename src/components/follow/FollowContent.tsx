@@ -19,10 +19,10 @@ export const FollowContent = ({ userId }: { userId: number }) => {
   const following = followingData?.following || [];
 
   return (
-    <div className="pt-20 h-full overflow-y-scroll scrollbar-hide">
+    <div className="pt-14 h-full overflow-y-scroll scrollbar-hide">
       <div
         className="w-full h-14 z-40 bg-white border-b border-b-slate-300 flex justify-around text-slate-900
-      absolute top-20 left-0 right-0"
+      absolute top-14 left-0 right-0"
       >
         <div
           onClick={() => setType("followers")}
