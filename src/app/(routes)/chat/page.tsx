@@ -1,30 +1,29 @@
 import { cookies } from "next/headers";
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
-import { LoginButton } from "@/components/layout/LoginButton";
-import FeedList from "@/components/feed/FeedList";
+import { ContentTitle } from "@/components/layout/ContentTitle";
+import { ChatRoomList } from "@/components/chat/ChatRoomList";
 
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import { prefetchAllFeed } from "@/lib/feed/hooks/useGetAllFeed";
+import { prefetchChatRooms } from "@/lib/chat/hooks/useGetChatRooms";
 
-export default async function Home() {
+export default async function ChatPage() {
   const accessToken = cookies().get("accessToken")?.value;
   const queryClient = new QueryClient();
-  await prefetchAllFeed(queryClient, {
+  await prefetchChatRooms(queryClient, {
     headers: {
       Cookie: `accessToken=${accessToken}`,
     },
   });
-
   return (
     <>
       <NavbarWrapper />
-      <LoginButton />
+      <ContentTitle title="채팅 목록"/>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <FeedList />
+        <ChatRoomList />
       </HydrationBoundary>
     </>
   );
