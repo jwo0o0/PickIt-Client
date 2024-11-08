@@ -29,7 +29,6 @@ export const Feed = ({
   const router = useRouter();
   const { isLogin, isLoading } = useLoginStatus();
   const openModal = useModalStore((state) => state.open);
-  const closeModal = useModalStore((state) => state.close);
 
   const queryClient = useQueryClient();
 
