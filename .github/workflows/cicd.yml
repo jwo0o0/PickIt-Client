@@ -7,20 +7,20 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: [self-hosted, ec2]
 
     steps:
       - name: Navigate to application directory
         run: cd /home/ubuntu/SNS_Project
-        
+
       - name: Checkout code
         run: |
-          git pull origin main 
-      
+          git pull origin main
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
