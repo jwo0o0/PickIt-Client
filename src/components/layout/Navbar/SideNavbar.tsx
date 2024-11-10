@@ -15,7 +15,7 @@ export const SideNavbar = () => {
       name: "write",
     },
     {
-      href: "/interest/likes",
+      href: "/heart/likes",
       name: "like",
     },
     {
