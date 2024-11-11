@@ -1,7 +1,7 @@
 "use client";
 import { useGetChatRooms } from "@/lib/chat/hooks/useGetChatRooms";
 import { ProfileImage } from "../common/ProfileImage";
-import timeAgo from "@/utils/timeAgo";
+import timeAgo from "@/utils/format/timeAgo";
 import { usePostChat } from "@/lib/chat/hooks/usePostChat";
 
 export const ChatRoomList = () => {

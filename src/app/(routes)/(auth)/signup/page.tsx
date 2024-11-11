@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignupPayload, signupSchema } from "@/utils/authSchema";
+import { SignupPayload, signupSchema } from "@/utils/schema/authSchema";
 import { useForm } from "react-hook-form";
 import {
   Form,

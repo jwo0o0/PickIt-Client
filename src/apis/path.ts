@@ -25,6 +25,10 @@ const FEED_API = {
   DELETE_FEED: (feedId: number) => `/feeds/${feedId}`,
   GET_ALL_FEED: (page: number, limit: number) =>
     `/feeds?page=${page}&limit=${limit}`,
+  GET_LIKED_FEED: (page: number, limit: number) =>
+    `/feeds/likes?page=${page}&limit=${limit}`,
+  GET_VOTED_FEED: (page: number, limit: number) =>
+    `/feeds/polls?page=${page}&limit=${limit}`,
 };
 
 const COMMENT_API = {

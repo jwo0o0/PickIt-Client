@@ -1,26 +1,24 @@
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
-import { LoginButton } from "@/components/layout/LoginButton";
-import FeedList from "@/components/feed/FeedList";
 
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import { prefetchAllFeed } from "@/lib/feed/hooks/useGetAllFeed";
+import { prefetchVotedFeed } from "@/lib/feed/hooks/useGetVotedFeed";
+import VotedFeedList from "@/components/heart/VotedFeedList";
 import { getAuthHeaders } from "@/lib/auth/authUtils";
 
-export default async function Home() {
+export default async function PollsPage() {
   const authHeaders = await getAuthHeaders();
   const queryClient = new QueryClient();
-  await prefetchAllFeed(queryClient, authHeaders);
+  await prefetchVotedFeed(queryClient, authHeaders);
 
   return (
     <>
       <NavbarWrapper />
-      <LoginButton />
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <FeedList />
+        <VotedFeedList />
       </HydrationBoundary>
     </>
   );
