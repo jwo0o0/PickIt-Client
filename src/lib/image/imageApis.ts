@@ -1,4 +1,4 @@
-import { UploadProfileImageResponse } from "./userTypes";
+import { UploadProfileImageResponse } from "../user/userTypes";
 import { customFormFetch, IMAGE_API } from "@/apis";
 
 export const uploadProfileImage = async (
