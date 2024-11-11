@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
 import { LoginButton } from "@/components/layout/LoginButton";
 import FeedList from "@/components/feed/FeedList";
@@ -9,15 +8,12 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import { prefetchAllFeed } from "@/lib/feed/hooks/useGetAllFeed";
+import { getAuthHeaders } from "@/lib/auth/authUtils";
 
 export default async function Home() {
-  const accessToken = cookies().get("accessToken")?.value;
+  const authHeaders = await getAuthHeaders();
   const queryClient = new QueryClient();
-  await prefetchAllFeed(queryClient, {
-    headers: {
-      Cookie: `accessToken=${accessToken}`,
-    },
-  });
+  await prefetchAllFeed(queryClient, authHeaders);
 
   return (
     <>
