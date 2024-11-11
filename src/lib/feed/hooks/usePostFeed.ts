@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { FeedPayload } from "@/utils/feedSchema";
+import { FeedPayload } from "@/utils/schema/feedSchema";
 import { PostFeedResponse } from "../feedTypes";
 import { customFetch, FEED_API } from "@/apis";
 import { uploadFeedImages } from "@/lib/user/userApis";

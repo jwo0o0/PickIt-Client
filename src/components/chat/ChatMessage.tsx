@@ -1,7 +1,7 @@
 "use client";
 import { memo, useState, useEffect } from "react";
 import { ChatMessageType } from "@/lib/chat/chatTypes";
-import formatChatTimestamp from "@/utils/formatTimestamp";
+import formatChatTimestamp from "@/utils/format/formatTimestamp";
 
 export const ChatMessage = memo(
   ({
