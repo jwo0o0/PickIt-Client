@@ -1,12 +1,15 @@
 # Build stage
-FROM node:20 AS builder
+FROM node:20 AS base
+
+RUN npm install -g pnpm
 
 # 작업 디렉토리 설정
+FROM base AS builder
 WORKDIR /app
 
 # 종속성 파일 복사 및 설치
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # 소스 코드 복사
 COPY . .
@@ -30,4 +33,4 @@ COPY --from=builder /app/node_modules ./node_modules
 EXPOSE 3000
 
 # 애플리케이션 시작
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
