@@ -1,0 +1,36 @@
+# 1. Build Stage
+FROM node:18 AS builder
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# 종속성 파일 복사 및 설치
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install
+
+# 소스 코드 복사
+COPY . .
+
+# Next.js 프로덕션 빌드
+RUN pnpm run build
+
+# 2. Production Stage
+FROM node:18-alpine AS runner
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# 빌드 결과물과 필요한 파일만 복사
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./
+
+# 프로덕션 종속성만 설치
+RUN npm install -g pnpm && pnpm install --prod
+
+# 환경 변수 설정 (예: 포트)
+ENV PORT 3000
+EXPOSE 3000
+
+# 애플리케이션 시작
+CMD ["pnpm", "start"]

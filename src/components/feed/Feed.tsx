@@ -1,4 +1,5 @@
 "use client";
+import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,13 +15,13 @@ import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
 import timeAgo from "@/utils/format/timeAgo";
 
-interface FeedProps {
+export interface FeedProps {
   feedId: number;
   data: FeedType | undefined;
   handleVoteSuccess?: () => Promise<void>;
   handleLikeSuccess?: () => Promise<void>;
 }
-export const Feed = ({
+export const Feed: FC<FeedProps> = ({
   feedId,
   data,
   handleVoteSuccess,
