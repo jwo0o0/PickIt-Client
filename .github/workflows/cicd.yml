@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH and deploy
-        env:
+      - name: SSH and deploy with Docker
+        env: 
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_HOST: ${{ secrets.EC2_HOST }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -24,9 +24,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key.pem -T $EC2_USER@$EC2_HOST << 'EOF'
             cd /home/ubuntu/SNS_Project
             git pull origin main
-            npm install
-            npm run build
-            pm2 restart sns_client || pm2 start npm --name sns_client -- start
+            docker-compose pull app # app 서비스의 이미지를 최신으로 가져옴
+            docker-compose up -d --build # 변경된 내용을 적용하며 컨테이너를 빌드 및 재시작
+            docker image prune -f # 불필요한 이미지를 삭제해 디스크 공간 확보
           EOF
           rm private_key.pem
         shell: bash
