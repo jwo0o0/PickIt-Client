@@ -1,3 +1,4 @@
+# Build stage
 FROM node:20 AS builder
 
 # 작업 디렉토리 설정
@@ -13,7 +14,7 @@ COPY . .
 # Next.js 프로덕션 빌드
 RUN pnpm run build
 
-# 2. Production Stage
+# Production Stage
 FROM node:20-alpine AS runner
 
 # 작업 디렉토리 설정
