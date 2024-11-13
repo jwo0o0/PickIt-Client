@@ -30,4 +30,4 @@ COPY --from=builder /app/node_modules ./node_modules
 EXPOSE 3000
 
 # 애플리케이션 시작
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
