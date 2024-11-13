@@ -16,8 +16,7 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - /etc/nginx/sites-available/sns.jwoo.site.conf:/etc/nginx/sites-available/sns.jwoo.site.conf
-      - /etc/nginx/sites-enabled/sns.jwoo.site.conf:/etc/nginx/sites-enabled/sns.jwoo.site.conf
+      - ./nginx/sns.jwoo.site.conf:/etc/nginx/conf.d/sns.jwoo.site.conf
       - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
