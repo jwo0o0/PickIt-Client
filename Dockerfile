@@ -6,7 +6,7 @@ WORKDIR /app
 
 # 종속성 파일 복사 및 설치
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 # 소스 코드 복사
 COPY . .
@@ -24,9 +24,7 @@ WORKDIR /app
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
-
-# 프로덕션 종속성만 설치
-RUN npm install -g pnpm && pnpm install --prod
+COPY --from=builder /app/node_modules ./node_modules 
 
 # 환경 변수 설정 (예: 포트)
 EXPOSE 3000
