@@ -5,4 +5,6 @@ const feedKeys = {
   voted: ["feed", "voted"] as const,
 };
 
+export type FeedKeysType = (typeof feedKeys)[keyof typeof feedKeys];
+
 export default feedKeys;
