@@ -1,5 +1,4 @@
-# 1. Build Stage
-FROM node:18 AS builder
+FROM node:20 AS builder
 
 # 작업 디렉토리 설정
 WORKDIR /app
@@ -15,7 +14,7 @@ COPY . .
 RUN pnpm run build
 
 # 2. Production Stage
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 # 작업 디렉토리 설정
 WORKDIR /app
@@ -29,7 +28,6 @@ COPY --from=builder /app/package.json ./
 RUN npm install -g pnpm && pnpm install --prod
 
 # 환경 변수 설정 (예: 포트)
-ENV PORT 3000
 EXPOSE 3000
 
 # 애플리케이션 시작
