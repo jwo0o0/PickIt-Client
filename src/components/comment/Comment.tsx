@@ -11,7 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteComment } from "@/lib/comment/hooks/useDeleteComment";
 import commentKeys from "@/lib/comment/commentQueries";
 import feedKeys from "@/lib/feed/feedQueries";
-import timeAgo from "@/utils/timeAgo";
+import timeAgo from "@/utils/format/timeAgo";
 
 interface CommentProps {
   data: CommentType;

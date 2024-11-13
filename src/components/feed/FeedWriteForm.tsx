@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FeedPayload, feedSchema } from "@/utils/feedSchema";
+import { FeedPayload, feedSchema } from "@/utils/schema/feedSchema";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

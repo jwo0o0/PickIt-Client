@@ -8,10 +8,11 @@ import { useAuthStore } from "@/store/auth/useAuthStore";
 interface NavbarButtonProps {
   href: string;
   name: string;
+  activePath: string[];
 }
-export const NavbarButton = ({ href, name }: NavbarButtonProps) => {
+export const NavbarButton = ({ href, name, activePath }: NavbarButtonProps) => {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive = activePath.includes(pathname);
   const [isHovered, setIsHovered] = useState(false);
 
   const user = useAuthStore((state) => state.user);

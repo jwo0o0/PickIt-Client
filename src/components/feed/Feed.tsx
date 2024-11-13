@@ -12,7 +12,7 @@ import { useVoteFeed } from "@/lib/feed/hooks/useVoteFeed";
 import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
-import timeAgo from "@/utils/timeAgo";
+import timeAgo from "@/utils/format/timeAgo";
 
 interface FeedProps {
   feedId: number;

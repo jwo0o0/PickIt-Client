@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { KakaoPayload, kakaoSignupSchema } from "@/utils/authSchema";
+import { KakaoPayload, kakaoSignupSchema } from "@/utils/schema/authSchema";
 import { useForm } from "react-hook-form";
 import {
   Form,
