@@ -1,9 +1,9 @@
-# Build stage
+# Base stage
 FROM node:20 AS base
 
 RUN npm install -g pnpm
 
-# 작업 디렉토리 설정
+# Build stage
 FROM base AS builder
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY . .
 RUN pnpm run build
 
 # Production Stage
-FROM node:20-alpine AS runner
+FROM base AS runner
 
 # 작업 디렉토리 설정
 WORKDIR /app
