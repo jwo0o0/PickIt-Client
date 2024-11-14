@@ -14,6 +14,7 @@ import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
 import timeAgo from "@/utils/format/timeAgo";
+import getImageName from "@/utils/format/getImageName";
 
 export interface FeedProps {
   feedId: number;
@@ -123,7 +124,7 @@ export const Feed: FC<FeedProps> = ({
                   >
                     <Image
                       src={image}
-                      alt={image}
+                      alt={getImageName(image)}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
