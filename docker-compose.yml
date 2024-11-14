@@ -1,0 +1,31 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PORT=3000
+      - NEXT_PUBLIC_PROD_API_URL=${NEXT_PUBLIC_PROD_API_URL}
+    env_file:
+      - .env
+    expose:
+      - "3000" # 내부적으로 Nginx와 통신하기 위해 expose 사용
+    networks:
+      - webnet
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - /etc/nginx/conf.d/sns.jwoo.site.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - app
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

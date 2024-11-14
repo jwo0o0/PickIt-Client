@@ -4,16 +4,19 @@ import {
   useQueryClient,
   UseInfiniteQueryResult,
   InfiniteData,
+  QueryKey,
 } from "@tanstack/react-query";
 import { FeedListType } from "@/lib/feed/feedTypes";
+import { FeedKeysType } from "@/lib/feed/feedQueries";
+import { FeedProps } from "@/components/feed/Feed";
 
 interface InfiniteFeedListProps {
-  queryKey: any;
+  queryKey: FeedKeysType;
   useFetchHook: () => UseInfiniteQueryResult<
     InfiniteData<FeedListType, unknown>,
     Error
   >;
-  FeedComponent: React.ComponentType<any>;
+  FeedComponent: React.ComponentType<FeedProps>;
 }
 
 export default function InfiniteFeedList({
@@ -51,7 +54,7 @@ export default function InfiniteFeedList({
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const handleInvalidateQuery = async () => {
-    await queryClient.invalidateQueries({ queryKey });
+    await queryClient.invalidateQueries({ queryKey: queryKey as QueryKey });
   };
 
   const feeds = data ? data.pages.flatMap((page) => page.feeds) : [];
