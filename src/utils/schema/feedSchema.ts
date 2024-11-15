@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const contentSchema = z.string().max(200, {
+const contentSchema = z.string().min(1).max(200, {
   message: "최대 200자까지 입력할 수 있습니다.",
 });
 
