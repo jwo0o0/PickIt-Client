@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import NavbarWrapper from "@/components/layout/Navbar/NavbarWrapper";
 import { ContentTitle } from "@/components/layout/ContentTitle";
@@ -10,6 +11,10 @@ import {
 } from "@tanstack/react-query";
 import { prefetchChatRooms } from "@/lib/chat/hooks/useGetChatRooms";
 
+export const metadata: Metadata = {
+  title: "채팅 목록",
+};
+
 export default async function ChatPage() {
   const accessToken = cookies().get("accessToken")?.value;
   const queryClient = new QueryClient();
@@ -21,7 +26,7 @@ export default async function ChatPage() {
   return (
     <>
       <NavbarWrapper />
-      <ContentTitle title="채팅 목록"/>
+      <ContentTitle title="채팅 목록" />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ChatRoomList />
       </HydrationBoundary>
