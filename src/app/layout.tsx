@@ -9,6 +9,20 @@ export const metadata: Metadata = {
     template: "PickIt | %s",
   },
   description: "질문과 고르기로 소통하는 SNS 서비스",
+  openGraph: {
+    title: "PickIt",
+    type: "website",
+    url: "https://sns.jwoo.site",
+    siteName: "PickIt",
+    images: [
+      {
+        url: "/images/og_image.png",
+        width: 800,
+        height: 400,
+        alt: "PickIt",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
