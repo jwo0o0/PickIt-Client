@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "PickIt",
     images: [
       {
-        url: "/images/og_image.png",
+        url: "https://sns.jwoo.site/images/og_image.png",
         width: 800,
         height: 400,
         alt: "PickIt",
