@@ -11,6 +11,7 @@ const compressImage = async (image: File) => {
     maxSizeMB: MAX_FILE_SIZE_MB,
     maxWidthOrHeight: Math.max(MAX_WIDTH, MAX_HEIGHT),
     useWebWorker: true,
+    fileType: "image/webp",
   };
   return await imageCompression(image, options);
 };
