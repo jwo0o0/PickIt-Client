@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /chat
+
+# Host
+Host: http://sns.jwoo.site
+
+# Sitemaps
+Sitemap: http://sns.jwoo.site/sitemap.xml
