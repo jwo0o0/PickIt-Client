@@ -14,6 +14,7 @@ import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
 import timeAgo from "@/utils/format/timeAgo";
+import getImageName from "@/utils/format/getImageName";
 
 export interface FeedProps {
   feedId: number;
@@ -95,7 +96,7 @@ export const Feed: FC<FeedProps> = ({
         <div id="profileImage" className="shrink-0 mr-4 relative">
           <ProfileImage imageUrl={data?.user.profileImage} sizes="40px" />
         </div>
-        <div className="flex-1">
+        <div className="w-full" style={{ maxWidth: "calc(100% - 60px)" }}>
           <div className="text-body2Normal md:text-body1Normal">
             <Link
               href={`/user/${data?.user.userId}`}
@@ -113,24 +114,26 @@ export const Feed: FC<FeedProps> = ({
               {data?.updatedAt ? timeAgo(data.updatedAt) : "N/A"}
             </span>
           </div>
-          <div className="mt-2">
-            {data?.images?.map((image, idx) => {
-              return (
-                <div
-                  key={idx}
-                  className="w-48 h-48 border border-slate-300 relative shrink-0"
-                >
-                  <Image
-                    src={image}
-                    alt={image}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority
-                  />
-                </div>
-              );
-            })}
+          <div className="mt-2 overflow-x-scroll scrollbar-hide">
+            <div className="flex space-x-2">
+              {data?.images?.map((image, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="w-48 h-48 border border-slate-300 bg-slate-200 relative shrink-0"
+                  >
+                    <Image
+                      src={image}
+                      alt={getImageName(image)}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="my-2 md:my-4 text-body2Normal">{data?.content}</div>
           {data?.isVoted ? (
