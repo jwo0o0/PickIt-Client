@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { HeartTabBar } from "@/components/heart/HeartTabBar";
 
-export const metatag: Metadata = {
-  title: "투표했거나 좋아요한 피드"
+export const metadata: Metadata = {
+  title: "투표했거나 좋아요한 피드",
 };
 
 export default function HeartLayout({
