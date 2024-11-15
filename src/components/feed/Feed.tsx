@@ -120,7 +120,7 @@ export const Feed: FC<FeedProps> = ({
                 return (
                   <div
                     key={idx}
-                    className="w-48 h-48 border border-slate-300 relative shrink-0"
+                    className="w-48 h-48 border border-slate-300 bg-slate-200 relative shrink-0"
                   >
                     <Image
                       src={image}
