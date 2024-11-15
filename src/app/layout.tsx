@@ -5,8 +5,8 @@ import { MainLayout } from "@/components/layout/MainLayout";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | PickIt",
     default: "PickIt",
+    template: "PickIt | %s",
   },
   description: "질문과 고르기로 소통하는 SNS 서비스",
 };

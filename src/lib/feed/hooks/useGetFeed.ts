@@ -3,7 +3,7 @@ import feedKeys from "@/lib/feed/feedQueries";
 import { customFetch, FEED_API } from "@/apis";
 import { FeedType } from "@/lib/feed/feedTypes";
 
-const fetchFeed = async (
+export const fetchFeed = async (
   feedId: number,
   options?: RequestInit
 ): Promise<FeedType> => {
