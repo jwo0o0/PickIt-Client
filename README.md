@@ -41,14 +41,11 @@
 
 ## 🌐 서비스 아키텍처
 
-
-
-## 🚀 CI/CD
-
+<img width="1024" alt="서비스 아키텍처" src="https://github.com/user-attachments/assets/aa2f8bcb-73a5-4871-80ef-78fe00d9db7a">
 
 
 ## 📝 관련 기록
-
+> - 블로그
 
 
 ### 🙋 만든 사람
