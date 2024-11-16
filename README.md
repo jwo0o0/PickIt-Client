@@ -1,10 +1,14 @@
-<img src="https://github.com/jwo0o0/SNS_Project/blob/develop/public/images/og_image.png?raw=true" width="800" />
+<div align=center>
+  <img src="https://github.com/jwo0o0/SNS_Project/blob/develop/public/images/og_image.png?raw=true" width="800" /><br/><br/>
+  <h1> 🗳️ PickIt </h2>
+  https://sns.jwoo.site/
+  <br><br>
 
-# 🗳️ PickIt 
+요즘 ‘선택 장애’라는 말이 있을 정도로 선택하는데 스트레스를 받는 사람들이 많습니다. <br/>
+반면 ‘밸런스 게임’이 유행할 정도로 무언가를 선택하며 서로를 알아가는 시간을 갖기도 합니다. <br/>
+**PickIt**은 이렇게 **투표 형식을 중심**으로 쉽고 빠르게 소통할 수 있는 SNS입니다!
 
-&ensp;&ensp;요즘 ‘선택 장애’라는 말이 있을 정도로 선택하는데 스트레스를 받는 사람들이 많습니다. <br/>
-&ensp;&ensp;반면 ‘밸런스 게임’이 유행할 정도로 무언가를 선택하며 서로를 알아가는 시간을 갖기도 합니다. <br/>
-&ensp;&ensp;**PickIt**은 이렇게 **투표 형식을 중심**으로 쉽고 빠르게 소통할 수 있는 SNS입니다!
+</div>
 
 ## 💡 해결하려는 문제
 1. **선택에 대한 스트레스와 피로 해결**<br/>
