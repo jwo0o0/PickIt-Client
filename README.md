@@ -34,7 +34,7 @@
 
 
 ## 🛠️ 기술 스택
-### Client
+### Client
 ![Next JS](https://img.shields.io/badge/Next.js-black?style=flat&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white) 	![Tanstack Query](https://img.shields.io/badge/-Tanstack%20Query-FF4154?style=flat&logo=react%20query&logoColor=white) ![Zustand](https://img.shields.io/badge/Zustand-black?style=flat) ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=flat&logo=pnpm&logoColor=f69220) ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=flat&logo=zod&logoColor=white)
 
 ### Server
