@@ -4,7 +4,7 @@
 
 &ensp;&ensp;요즘 ‘선택 장애’라는 말이 있을 정도로 선택하는데 스트레스를 받는 사람들이 많습니다. <br/>
 &ensp;&ensp;반면 ‘밸런스 게임’이 유행할 정도로 무언가를 선택하며 서로를 알아가는 시간을 갖기도 합니다. <br/>
-&ensp;&ensp;**PickIt**은 이렇게 투표 형식을 중심으로 쉽고 빠르게 소통할 수 있는 기능을 제공합니다!
+&ensp;&ensp;**PickIt**은 이렇게 **투표 형식을 중심**으로 쉽고 빠르게 소통할 수 있는 SNS입니다!
 
 ## 💡 해결하려는 문제
 1. **선택에 대한 스트레스와 피로 해결**<br/>
@@ -25,7 +25,14 @@
 
 
 ## 🛠️ 기술 스택
+### Frontend
+![Next JS](https://img.shields.io/badge/Next.js-black?style=flat&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white) 	![Tanstack Query](https://img.shields.io/badge/-Tanstack%20Query-FF4154?style=flat&logo=react%20query&logoColor=white) ![Zustand](https://img.shields.io/badge/Zustand-black?style=flat) ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=flat&logo=pnpm&logoColor=f69220) ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=flat&logo=zod&logoColor=white)
 
+### Backend
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=flat&logo=mysql&logoColor=white) ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=flat&logo=JSON%20web%20tokens) ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=flat&logo=redis&logoColor=white) ![Socket.io](https://img.shields.io/badge/Socket.io-black?style=flat&logo=socket.io&badgeColor=010101)
+### Infra
+![Amazon S3](https://img.shields.io/badge/S3-FF9900?style=flat&logo=amazons3&logoColor=white) ![Amazon EC2](https://img.shields.io/badge/EC2-FF9900?style=flat&logo=amazonec2&logoColor=white) ![Amazon Route 53](https://img.shields.io/badge/Route%2053-8C4FFF?style=flat&logo=amazonroute53&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=flat&logo=nginx&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white) ![Docker](https://img.shields.io/badge/Compose-%230db7ed.svg?style=flat&logo=docker&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=flat&logo=githubactions&logoColor=white)
 
 
 ## 🌐 서비스 아키텍처
