@@ -4,6 +4,11 @@
   https://sns.jwoo.site/
   <br><br>
 
+  [![Application](http://img.shields.io/badge/Application-000000?style=flat&logo=github&logoColor=white&link=https://sns.jwoo.site/)](https://sns.jwoo.site/)
+[![Storybook](http://img.shields.io/badge/Storybook-FF4785?style=flat&logo=Storybook&logoColor=white&link=https://sns.jwoo.site)](https://sns.jwoo.site)
+[![API Docs](http://img.shields.io/badge/Swagger-85EA2D?style=flat&logo=swagger&logoColor=white&link=https://sns.jwoo.site)](https://sns.jwoo.site)
+
+
 요즘 ‘선택 장애’라는 말이 있을 정도로 선택하는데 스트레스를 받는 사람들이 많습니다. <br/>
 반면 ‘밸런스 게임’이 유행할 정도로 무언가를 선택하며 서로를 알아가는 시간을 갖기도 합니다. <br/>
 **PickIt**은 이렇게 **투표 형식을 중심**으로 쉽고 빠르게 소통할 수 있는 SNS입니다!
