@@ -36,7 +36,11 @@ jobs:
         run: npm run build
 
       - name: Make zip file
-        run: zip -qq -r nextjs-app-${{ github.sha }}.zip .next node_modules package.json
+        run: |
+          zip -qq -r nextjs-app-${{ github.sha }}.zip .next node_modules package.json appspec.yml scripts/
+
+      - name: Verify zip file contents
+        run: unzip -l nextjs-app-${{ github.sha }}.zip
         
       - name: Clean old files from S3
         run: |
