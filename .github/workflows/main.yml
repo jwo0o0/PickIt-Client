@@ -42,13 +42,12 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ env.AWS_REGION }}
 
-      - name: Deploy via CodeDeploy
-        uses: aws-actions/aws-codedeploy-deploy@v3
-        with:
-          application-name: ${{ env.CODE_DEPLOY_APPLICATION_NAME }}
-          deployment-group-name: ${{ env.CODE_DEPLOY_GROUP_NAME }}
-          bundle-type: zip
-          eTag: 'nextjs-app'
-          bucket: ${{ env.S3_BUCKET_NAME }}
-          key: "nextjs-app-${{ github.sha }}.zip"
-          region: ${{ env.AWS_REGION }}
+      - name: Deploy via AWS CLI
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name ${{ env.CODE_DEPLOY_GROUP_NAME }} \
+            --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=nextjs-app-${{ github.sha }}.zip \
+            --region ${{ env.AWS_REGION }}
+
