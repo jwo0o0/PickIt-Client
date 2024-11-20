@@ -46,7 +46,7 @@
 
 
 ## 🌐 서비스 아키텍처
-
+<img src="https://github.com/user-attachments/assets/c8fd626a-7942-4f97-a5b6-25387f174b76" width="800" />
 
 ## 📝 관련 기록
 > - 블로그
