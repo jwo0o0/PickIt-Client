@@ -11,7 +11,6 @@ module.exports = {
       env: {
         NODE_ENV: "production", // Node.js 환경 설정
         PORT: 3000, // 앱이 사용할 포트 번호
-        NEXT_PUBLIC_PROD_API_URL: process.env.NEXT_PUBLIC_PROD_API_URL, // 환경 변수 설정
       },
     },
   ],
