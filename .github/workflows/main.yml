@@ -54,11 +54,13 @@ jobs:
           mkdir -p build/standalone/.next/static
           mkdir -p build/standalone/public
           mkdir -p build/standalone/scripts
-          cp -r .next/standalone/* build/standalone/
-          cp -r .next/static/* build/standalone/.next/static/
-          cp -r public/* build/standalone/public/
-          cp -r scripts/* build/standalone/scripts/
+
+          rsync -a .next/standalone/ build/standalone/
+          rsync -a .next/static/ build/standalone/.next/static/
+          rsync -a public/ build/standalone/public/
+          cp scripts/* build/standalone/scripts/
           cp appspec.yml build/standalone
+          cp .env build/standalone/
           cd build
           zip -qq -r ../nextjs-app-${{ github.sha }}.zip .
         shell: bash
