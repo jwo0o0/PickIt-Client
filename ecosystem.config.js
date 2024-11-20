@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "sns_client", // 앱의 이름
-      script: "npm", // Next.js 스크립트 경로
+      script: "pnpm", // Next.js 스크립트 경로
       args: "start", // Next.js 앱을 시작할 때 사용할 인수
       cwd: "/home/ubuntu/deploy", // 프로젝트 루트 디렉토리
       instances: "1", // 클러스터 모드에서 실행할 인스턴스 수 (CPU 코어 수만큼)
