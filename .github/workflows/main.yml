@@ -10,7 +10,7 @@ env:
   S3_BUCKET_NAME: sns-client-bucket
   CODE_DEPLOY_APPLICATION_NAME: sns-client-code-deploy
   CODE_DEPLOY_GROUP_NAME: ec2-deploy
-  
+
 jobs:
   deploy:
     name: Deploy to EC2
@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      
+
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
@@ -46,13 +46,13 @@ jobs:
           echo "NEXT_PUBLIC_PROD_API_URL=${{ secrets.NEXT_PUBLIC_PROD_API_URL }}" > .env
 
       - name: Build Next.js app
-        run: pnpm build build
+        run: pnpm build
 
       - name: Make zip file
         run: |
           zip -qq -r nextjs-app-${{ github.sha }}.zip . -x ".git/*"
         shell: bash
-        
+
       - name: Clean old files from S3
         run: |
           aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ | awk '{print $4}' | grep 'nextjs-app-' | while read file; do
@@ -62,7 +62,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ env.AWS_REGION }}
-          
+
       - name: Upload to S3
         run: |
           aws s3 cp nextjs-app-${{ github.sha }}.zip s3://${{ env.S3_BUCKET_NAME }}/nextjs-app-${{ github.sha }}.zip
@@ -77,7 +77,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-          
+
       - name: Deploy via AWS CLI
         run: |
           aws deploy create-deployment \
