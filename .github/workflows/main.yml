@@ -24,16 +24,29 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      
+      - name: Cache pnpm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm-global
+          key: ${{ runner.os }}-pnpm-cache
+          restore-keys: |
+            ${{ runner.os }}-pnpm-cache
+      - name: Install pnpm
+        run: |
+          if ! command -v pnpm &> /dev/null; then
+            npm install -g pnpm
+          fi
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
       - name: Create .env file
         run: |
           echo "NEXT_PUBLIC_PROD_API_URL=${{ secrets.NEXT_PUBLIC_PROD_API_URL }}" > .env
 
       - name: Build Next.js app
-        run: npm run build
+        run: pnpm build build
 
       - name: Make zip file
         run: |
