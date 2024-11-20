@@ -51,11 +51,11 @@ jobs:
 
       - name: Make zip file
         run: |
-          mkdir -p deploy_build/standalone
-          cp -r .next/standalone/* deploy_build/standalone/
-          cp -r .next/static deploy_build/standalone/.next/static
-          cp -r public deploy_build/standalone/public
-          cd deploy_build
+          mkdir -p build
+          cp -r .next/standalone build/
+          cp -r .next/static build/.next/static
+          cp -r public build/public
+          cd build
           zip -qq -r ../nextjs-app-${{ github.sha }}.zip .
         shell: bash
 
