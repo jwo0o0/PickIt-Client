@@ -1,13 +1,14 @@
 <div align=center>
   <img src="https://github.com/jwo0o0/SNS_Project/blob/develop/public/images/og_image.png?raw=true" width="800" /><br/><br/>
   <h1> 🗳️ PickIt </h2>
-  https://sns.jwoo.site/
+  https://pickitsns.site/
   <br><br>
 
-  [![Application](http://img.shields.io/badge/Application-000000?style=flat&logo=github&logoColor=white&link=https://sns.jwoo.site/)](https://sns.jwoo.site/)
-[![Storybook](http://img.shields.io/badge/Storybook-FF4785?style=flat&logo=Storybook&logoColor=white&link=https://sns.jwoo.site)](https://sns.jwoo.site)
-[![API Docs](http://img.shields.io/badge/Swagger-85EA2D?style=flat&logo=swagger&logoColor=white&link=https://sns.jwoo.site)](https://sns.jwoo.site)
-
+  [![Application](http://img.shields.io/badge/Application-000000?style=flat&logo=github&logoColor=white&link=https://pickitsns.site/)](https://sns.jwoo.site/)
+  <!--
+[![Storybook](http://img.shields.io/badge/Storybook-FF4785?style=flat&logo=Storybook&logoColor=white&link=https://pickitsns.site)](https://sns.jwoo.site)
+[![API Docs](http://img.shields.io/badge/Swagger-85EA2D?style=flat&logo=swagger&logoColor=white&link=https://pickitsns.site)](https://sns.jwoo.site)
+-->
 
 요즘 ‘선택 장애’라는 말이 있을 정도로 선택하는데 스트레스를 받는 사람들이 많습니다. <br/>
 반면 ‘밸런스 게임’이 유행할 정도로 무언가를 선택하며 서로를 알아가는 시간을 갖기도 합니다. <br/>
