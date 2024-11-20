@@ -1,12 +1,11 @@
 #!/bin/bash
 
-cd /home/ubuntu/SNS_Client
+APP_DIR="/home/ubuntu/deploy"
 
-# 의존성 설치 (최소 설치만 필요할 경우)
-echo "Installing production dependencies..."
-npm install --production
+echo "Navigating to application directory..."
+cd $APP_DIR
 
 echo "Starting application..."
-npm run deploy
+pm2 start ecosystem.config.js
 
 echo "Deployment complete!"
