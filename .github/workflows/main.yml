@@ -55,9 +55,9 @@ jobs:
           mkdir -p build/standalone/public
           mkdir -p build/standalone/scripts
 
-          tar -czf - .next/standalone | tar -xzf - -C build/standalone/
-          tar -czf - .next/static | tar -xzf - -C build/standalone/.next/static/
-          tar -czf - public | tar -xzf - -C build/standalone/public/
+          tar -cf - -C .next/standalone . | tar -xf - -C build/standalone/
+          tar -cf - -C .next/static . | tar -xf - -C build/standalone/.next/static/
+          tar -cf - -C public . | tar -xf - -C build/standalone/public/
   
           cp scripts/* build/standalone/scripts/
           cp appspec.yml build/standalone
