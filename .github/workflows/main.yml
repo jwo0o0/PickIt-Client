@@ -51,7 +51,12 @@ jobs:
 
       - name: Make zip file
         run: |
-          zip -qq -r nextjs-app-${{ github.sha }}.zip . -x ".git/*"
+          mkdir -p deploy_build/standalone
+          cp -r .next/standalone/* deploy_build/standalone/
+          cp -r .next/static deploy_build/standalone/.next/static
+          cp -r public deploy_build/standalone/public
+          cd deploy_build
+          zip -qq -r ../nextjs-app-${{ github.sha }}.zip .
         shell: bash
 
       - name: Clean old files from S3
