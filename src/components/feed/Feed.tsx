@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProfileImage } from "@/components/common/ProfileImage";
 import { Modal, LoginModalContent } from "../common/modal";
+import Dropdown from "@/components/common/Dropdown";
 
 import { FeedType } from "@/lib/feed/feedTypes";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,6 +14,8 @@ import { useVoteFeed } from "@/lib/feed/hooks/useVoteFeed";
 import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
+import { useAuthStore } from "@/store/auth/useAuthStore";
+import { useStore } from "@/store/useStore";
 import timeAgo from "@/utils/format/timeAgo";
 import getImageName from "@/utils/format/getImageName";
 
@@ -29,6 +32,8 @@ export const Feed: FC<FeedProps> = ({
   handleLikeSuccess,
 }: FeedProps) => {
   const router = useRouter();
+
+  const user = useStore(useAuthStore, (state) => state.user);
   const { isLogin, isLoading } = useLoginStatus();
   const openModal = useModalStore((state) => state.open);
 
@@ -243,6 +248,9 @@ export const Feed: FC<FeedProps> = ({
             <div className="text-sm">{data?.commentCount}</div>
           </div>
         </div>
+        {user?.id === data?.user.userId && (
+          <Dropdown handleClickDelete={() => {}} hadleClickEdit={() => {}} />
+        )}
       </div>
       <Modal>
         <LoginModalContent />
