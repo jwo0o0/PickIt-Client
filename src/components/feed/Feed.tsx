@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import feedKeys from "@/lib/feed/feedQueries";
 import { useVoteFeed } from "@/lib/feed/hooks/useVoteFeed";
 import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
+import { useDeleteFeed } from "@/lib/feed/hooks/useDeleteFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
 import { useAuthStore } from "@/store/auth/useAuthStore";
@@ -88,6 +89,21 @@ export const Feed: FC<FeedProps> = ({
         }
       );
     }
+  };
+
+  const { mutate: deleteFeedMutation } = useDeleteFeed();
+
+  const handleClickDelete = () => {
+    deleteFeedMutation(
+      {
+        feedId,
+      },
+      {
+        onSuccess: () => {
+          router.back();
+        },
+      }
+    );
   };
 
   return (
@@ -249,7 +265,10 @@ export const Feed: FC<FeedProps> = ({
           </div>
         </div>
         {user?.id === data?.user.userId && (
-          <Dropdown handleClickDelete={() => {}} hadleClickEdit={() => {}} />
+          <Dropdown
+            handleClickDelete={handleClickDelete}
+            hadleClickEdit={() => {}}
+          />
         )}
       </div>
       <Modal>
