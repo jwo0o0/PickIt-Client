@@ -26,14 +26,6 @@
 3. **유용한 정보를 제공하는 효과적인 방식 제공**<br/>
     SNS가 비즈니스와 지식 전달의 역할까지 하고 있습니다. 선택형 질문으로 자연스러운 참여를 유도하고, 기억에 더 남게 할 수 있습니다.
 
-## 🔍 핵심 기능
-#### 카카오 소셜 로그인
-#### 피드 작성
-#### 피드 조회
-#### 팔로잉/팔로우
-#### 실시간 채팅
-
-
 ## 🛠️ 기술 스택
 ### Client
 ![Next JS](https://img.shields.io/badge/Next.js-black?style=flat&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white) 	![Tanstack Query](https://img.shields.io/badge/-Tanstack%20Query-FF4154?style=flat&logo=react%20query&logoColor=white) ![Zustand](https://img.shields.io/badge/Zustand-black?style=flat) ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=flat&logo=pnpm&logoColor=f69220) ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=flat&logo=zod&logoColor=white)
@@ -45,12 +37,16 @@
 ![Amazon EC2](https://img.shields.io/badge/EC2-FF9900?style=flat&logo=amazonec2&logoColor=white) ![Amazon S3](https://img.shields.io/badge/S3-569A31?style=flat&logo=amazons3&logoColor=white) ![Amazon CodeDeploy](https://img.shields.io/badge/CodeDeploy-569A31?style=flat&logo=CodeDeploy&logoColor=white) ![Amazon Route 53](https://img.shields.io/badge/Route%2053-8C4FFF?style=flat&logo=amazonroute53&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=flat&logo=nginx&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=flat&logo=githubactions&logoColor=white)
 
 
+## 🔍 핵심 기능
+
+![핵심기능1](https://github.com/user-attachments/assets/43f1398d-7c6f-46c0-bf82-2a5dfb2535da)
+
+![핵심기능2](https://github.com/user-attachments/assets/9e466754-45dd-4a79-a9c5-26d29482000b)
+
+![핵심기능3](https://github.com/user-attachments/assets/406ae775-db2c-4fcc-b714-a35eebaf81a2)
+
+![핵심기능4](https://github.com/user-attachments/assets/ed19f2dd-0a9d-4146-a231-a2f9fd42af96)
+
 ## 🌐 서비스 아키텍처
 <img src="https://github.com/user-attachments/assets/c8fd626a-7942-4f97-a5b6-25387f174b76" width="800" />
-
-## 📝 관련 기록
-> - 블로그
-
-
-### 🙋 만든 사람
 
