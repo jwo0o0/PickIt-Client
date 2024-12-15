@@ -44,7 +44,8 @@
 
 ![핵심기능3](https://github.com/user-attachments/assets/406ae775-db2c-4fcc-b714-a35eebaf81a2)
 
-![핵심기능4](https://github.com/user-attachments/assets/ed19f2dd-0a9d-4146-a231-a2f9fd42af96)
+![핵심기능4](https://github.com/user-attachments/assets/26ad7109-9e4c-484b-9b51-39b000bdc4fb)
+
 
 ## 🌐 서비스 아키텍처
 <img src="https://github.com/user-attachments/assets/c8fd626a-7942-4f97-a5b6-25387f174b76" width="800" />
