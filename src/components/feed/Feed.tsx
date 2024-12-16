@@ -209,9 +209,11 @@ export const Feed: FC<FeedProps> = ({
               })}
             </div>
           )}
-          <div className="my-2 md:my-4 text-body2Normal">
-            {data?.pollContent}
-          </div>
+          {data?.isVoted && (
+            <div className="my-2 md:my-4 text-body2Normal">
+              {data?.pollContent}
+            </div>
+          )}
           <div className="flex items-center text-slate-600">
             <button
               onClick={(e) => {
