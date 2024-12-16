@@ -1,11 +1,12 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProfileImage } from "@/components/common/ProfileImage";
 import { Modal, LoginModalContent } from "../common/modal";
 import Dropdown from "@/components/common/Dropdown";
+import { FeedEditDrawer } from "@/components/feed/FeedEditDrawer";
 
 import { FeedType } from "@/lib/feed/feedTypes";
 import { useQueryClient } from "@tanstack/react-query";
@@ -37,6 +38,8 @@ export const Feed: FC<FeedProps> = ({
   const user = useStore(useAuthStore, (state) => state.user);
   const { isLogin, isLoading } = useLoginStatus();
   const openModal = useModalStore((state) => state.open);
+
+  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -267,10 +270,19 @@ export const Feed: FC<FeedProps> = ({
           </div>
         </div>
         {user?.id === data?.user.userId && (
-          <Dropdown
-            handleClickDelete={handleClickDelete}
-            hadleClickEdit={() => {}}
-          />
+          <>
+            <Dropdown
+              handleClickDelete={handleClickDelete}
+              hadleClickEdit={() => {
+                setIsOpenDrawer(true);
+              }}
+            />
+            <FeedEditDrawer
+              isOpen={isOpenDrawer}
+              setOpen={setIsOpenDrawer}
+              data={data}
+            />
+          </>
         )}
       </div>
       <Modal>
