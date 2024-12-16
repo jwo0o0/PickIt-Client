@@ -2,39 +2,48 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 interface FeedFormImagesProps {
-  images: File[];
+  images: (File | string)[];
   onDelete: (idx: number) => void;
 }
 export const FeedFormImages = ({ images, onDelete }: FeedFormImagesProps) => {
   const [blobUrls, setBlobUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    const urls = images.map((image) => URL.createObjectURL(image));
+    const urls = images.map((image) =>
+      typeof image === "string" ? image : URL.createObjectURL(image)
+    );
     setBlobUrls(urls);
 
     return () => {
-      urls.forEach((url) => URL.revokeObjectURL(url));
+      urls.forEach((url, idx) => {
+        if (typeof images[idx] !== "string") {
+          URL.revokeObjectURL(url);
+        }
+      });
     };
   }, [images]);
 
   return (
     <>
-      {images.map((image, idx) => {
+      {blobUrls.map((url, idx) => {
         return (
           <div
             key={idx}
             className="w-20 h-20 border border-slate-300 ml-2 relative shrink-0"
           >
             <Image
-              src={blobUrls[idx]}
+              src={url}
               fill={true}
-              alt={image.name}
+              sizes="100%"
+              alt={`image-${idx}`}
               className="object-cover"
             />
             <button
               type="button"
               onClick={() => {
-                URL.revokeObjectURL(blobUrls[idx]);
+                if (typeof images[idx] !== "string") {
+                  URL.revokeObjectURL(url);
+                }
                 onDelete(idx);
               }}
               className="absolute top-1 right-1"
