@@ -65,7 +65,7 @@ export const FeedEditForm = ({ data }: FeedEditFormProps) => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="w-full h-full overflow-y-scroll">
+      <div className="w-full h-full overflow-y-scroll scrollbar-hide">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="w-full h-36">
