@@ -1,6 +1,8 @@
 "use client";
+import { useState } from "react";
 import { Feed } from "../feed/Feed";
 import Dropdown from "@/components/common/Dropdown";
+import { FeedEditDrawer } from "@/components/feed/FeedEditDrawer";
 
 import { useAuthStore } from "@/store/auth/useAuthStore";
 import { useStore } from "@/store/useStore";
@@ -14,6 +16,7 @@ interface UserFeedsProps {
   userIdParam: string;
 }
 export const UserFeeds = ({ userIdParam }: UserFeedsProps) => {
+  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
   const user = useStore(useAuthStore, (state) => state.user);
   const { data } = useGetUserFeeds(Number(userIdParam));
 
@@ -47,12 +50,21 @@ export const UserFeeds = ({ userIdParam }: UserFeedsProps) => {
           className="my-4 pb-6 border-b border-b-slate-300 relative"
         >
           {String(user?.id) === userIdParam && (
-            <Dropdown
-              handleClickDelete={() => {
-                handleClickDelete(feed.feedId);
-              }}
-              hadleClickEdit={() => {}}
-            />
+            <>
+              <Dropdown
+                handleClickDelete={() => {
+                  handleClickDelete(feed.feedId);
+                }}
+                hadleClickEdit={() => {
+                  setIsOpenDrawer(true);
+                }}
+              />
+              <FeedEditDrawer
+                isOpen={isOpenDrawer}
+                setIsOpen={setIsOpenDrawer}
+                data={feed}
+              />
+            </>
           )}
           <Feed
             feedId={feed.feedId}
