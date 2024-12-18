@@ -5,17 +5,17 @@ import { FeedType } from "@/lib/feed/feedTypes";
 
 interface FeedEditDrawerProps {
   isOpen: boolean;
-  setOpen: (open: boolean) => void;
-  data: FeedType | undefined;
+  setIsOpen: (open: boolean) => void;
+  data: FeedType;
 }
 export const FeedEditDrawer = ({
   isOpen,
-  setOpen,
+  setIsOpen,
   data,
 }: FeedEditDrawerProps) => {
   return (
     <>
-      <Drawer open={isOpen} onOpenChange={setOpen}>
+      <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerContent
           aria-describedby={undefined}
           className="mx-auto w-full md:w-[600px] lg:w-[680px] h-[80vh] bg-white z-50
@@ -23,7 +23,7 @@ export const FeedEditDrawer = ({
         >
           <DrawerTitle className="hidden"></DrawerTitle>
           <div className="h-full overflow-y-scroll">
-            <FeedEditForm data={data} />
+            <FeedEditForm data={data} setIsOpen={setIsOpen} />
           </div>
         </DrawerContent>
       </Drawer>
