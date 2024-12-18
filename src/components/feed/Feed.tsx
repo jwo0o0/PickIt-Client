@@ -270,21 +270,19 @@ export const Feed: FC<FeedProps> = ({
           </div>
         </div>
         {user?.id === data?.user.userId && (
-          <>
-            <Dropdown
-              handleClickDelete={handleClickDelete}
-              hadleClickEdit={() => {
-                setIsOpenDrawer(true);
-              }}
-            />
-            <FeedEditDrawer
-              isOpen={isOpenDrawer}
-              setIsOpen={setIsOpenDrawer}
-              data={data}
-            />
-          </>
+          <Dropdown
+            handleClickDelete={handleClickDelete}
+            hadleClickEdit={() => {
+              setIsOpenDrawer(true);
+            }}
+          />
         )}
       </div>
+      <FeedEditDrawer
+        isOpen={isOpenDrawer}
+        setIsOpen={setIsOpenDrawer}
+        data={data}
+      />
       <Modal>
         <LoginModalContent />
       </Modal>
