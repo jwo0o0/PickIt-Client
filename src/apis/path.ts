@@ -10,6 +10,7 @@ const AUTH_API = {
 const IMAGE_API = {
   PROFILE_UPLOAD: (userId: number) => `/image/profile?userId=${userId}`,
   FEED_UPLOAD: (feedId: number) => `/image/feeds?feedId=${feedId}`,
+  FEED_UPDATE: (feedId: number) => `/image/feeds/${feedId}`,
 };
 
 const USER_API = {
@@ -23,6 +24,7 @@ const FEED_API = {
   VOTE_FEED: (feedId: number) => `/feeds/${feedId}/vote`,
   LIKE_FEED: (feedId: number) => `/feeds/${feedId}/like`,
   DELETE_FEED: (feedId: number) => `/feeds/${feedId}`,
+  PATCH_FEED: (feedId: number) => `/feeds/${feedId}`,
   GET_ALL_FEED: (page: number, limit: number) =>
     `/feeds?page=${page}&limit=${limit}`,
   GET_LIKED_FEED: (page: number, limit: number) =>

@@ -29,14 +29,38 @@ export const uploadProfileImage = async (
   });
 };
 
-export const uploadFeedImages = async (images: File[], feedId: number) => {
+export const uploadFeedImages = async (
+  images: (File | string)[],
+  feedId: number
+) => {
   const formData = new FormData();
   for (const image of images) {
-    const compressedImage = await compressImage(image);
-    formData.append("images", compressedImage);
+    if (typeof image !== "string") {
+      const compressedImage = await compressImage(image);
+      formData.append("images", compressedImage);
+    }
   }
   return customFormFetch(IMAGE_API.FEED_UPLOAD(feedId), {
     method: "POST",
+    body: formData,
+  });
+};
+
+export const updateFeedImages = async (
+  images: (File | string)[],
+  feedId: number
+) => {
+  const formData = new FormData();
+  for (const image of images) {
+    if (typeof image === "string") {
+      formData.append("imageUrls", image);
+    } else {
+      const compressedImage = await compressImage(image);
+      formData.append("images", compressedImage);
+    }
+  }
+  return customFormFetch(IMAGE_API.FEED_UPDATE(feedId), {
+    method: "PATCH",
     body: formData,
   });
 };

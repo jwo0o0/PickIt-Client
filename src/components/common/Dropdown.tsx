@@ -30,7 +30,12 @@ const Dropdown = ({ handleClickDelete, hadleClickEdit }: DropdownProps) => {
           </svg>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mr-4 md:mr-32 text-slate-900">
-          <DropdownMenuItem onClick={handleClickDelete}>
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClickDelete();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -47,7 +52,12 @@ const Dropdown = ({ handleClickDelete, hadleClickEdit }: DropdownProps) => {
             </svg>
             삭제하기
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={hadleClickEdit}>
+          <DropdownMenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              hadleClickEdit();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
