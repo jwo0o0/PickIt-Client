@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +16,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { usePostFeed } from "@/lib/feed/hooks/usePostFeed";
 import { PostFeedResponse } from "@/lib/feed/feedTypes";
+import { FeedFormImages } from "./FeedFormImages";
 
 export const FeedWriteForm = () => {
   const router = useRouter();
@@ -74,10 +74,9 @@ export const FeedWriteForm = () => {
     setValue("images", updatedImages, { shouldValidate: true });
   };
 
-  const handleClickDeleteButton = (image: File, idx: number) => {
+  const handleClickDeleteButton = (idx: number) => {
     const updatedImages = getValues("images").filter((_, i) => i !== idx);
     setValue("images", updatedImages, { shouldValidate: true });
-    URL.revokeObjectURL(URL.createObjectURL(image));
   };
 
   const handleChangePollContent = (
@@ -257,41 +256,10 @@ export const FeedWriteForm = () => {
                   </FormItem>
                 )}
               />
-              {getValues("images").map((image, idx) => {
-                return (
-                  <div
-                    key={idx}
-                    className="w-20 h-20 border border-slate-300 ml-2 relative shrink-0"
-                  >
-                    <Image
-                      src={URL.createObjectURL(image)}
-                      fill={true}
-                      alt={image.name}
-                      className="object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        handleClickDeleteButton(image, idx);
-                      }}
-                      className="absolute top-1 right-1"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="size-4 fill-slate-950"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                );
-              })}
+              <FeedFormImages
+                images={getValues("images")}
+                onDelete={handleClickDeleteButton}
+              />
             </div>
           </div>
         </form>

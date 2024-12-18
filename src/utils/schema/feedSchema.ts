@@ -12,7 +12,9 @@ const pollsSchema = z.string().min(1).array().min(2).max(5, {
   message: "선택 항목은 5개까지 추가할 수 있습니다.",
 });
 
-const imagesSchema = z.instanceof(File).array().max(5);
+const imagesSchema = z
+  .array(z.union([z.instanceof(File), z.string().url()]))
+  .max(5);
 
 export const feedSchema = z.object({
   content: contentSchema,
@@ -22,3 +24,11 @@ export const feedSchema = z.object({
 });
 
 export type FeedPayload = z.infer<typeof feedSchema>;
+
+export const feedEditSchema = z.object({
+  content: contentSchema,
+  pollContent: pollContentSchema,
+  images: imagesSchema,
+});
+
+export type FeedEditPayload = z.infer<typeof feedEditSchema>;

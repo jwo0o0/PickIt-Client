@@ -1,24 +1,29 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProfileImage } from "@/components/common/ProfileImage";
 import { Modal, LoginModalContent } from "../common/modal";
+import Dropdown from "@/components/common/Dropdown";
+import { FeedEditDrawer } from "@/components/feed/FeedEditDrawer";
 
 import { FeedType } from "@/lib/feed/feedTypes";
 import { useQueryClient } from "@tanstack/react-query";
 import feedKeys from "@/lib/feed/feedQueries";
 import { useVoteFeed } from "@/lib/feed/hooks/useVoteFeed";
 import { useLikeFeed } from "@/lib/feed/hooks/useLikeFeed";
+import { useDeleteFeed } from "@/lib/feed/hooks/useDeleteFeed";
 import { useLoginStatus } from "@/lib/auth/hooks/useLoginStatus";
 import { useModalStore } from "@/store/modal/useModalStore";
+import { useAuthStore } from "@/store/auth/useAuthStore";
+import { useStore } from "@/store/useStore";
 import timeAgo from "@/utils/format/timeAgo";
 import getImageName from "@/utils/format/getImageName";
 
 export interface FeedProps {
   feedId: number;
-  data: FeedType | undefined;
+  data: FeedType;
   handleVoteSuccess?: () => Promise<void>;
   handleLikeSuccess?: () => Promise<void>;
 }
@@ -29,8 +34,12 @@ export const Feed: FC<FeedProps> = ({
   handleLikeSuccess,
 }: FeedProps) => {
   const router = useRouter();
+
+  const user = useStore(useAuthStore, (state) => state.user);
   const { isLogin, isLoading } = useLoginStatus();
   const openModal = useModalStore((state) => state.open);
+
+  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -83,6 +92,21 @@ export const Feed: FC<FeedProps> = ({
         }
       );
     }
+  };
+
+  const { mutate: deleteFeedMutation } = useDeleteFeed();
+
+  const handleClickDelete = () => {
+    deleteFeedMutation(
+      {
+        feedId,
+      },
+      {
+        onSuccess: () => {
+          router.replace("/");
+        },
+      }
+    );
   };
 
   return (
@@ -188,9 +212,11 @@ export const Feed: FC<FeedProps> = ({
               })}
             </div>
           )}
-          <div className="my-2 md:my-4 text-body2Normal">
-            {data?.pollContent}
-          </div>
+          {data?.isVoted && (
+            <div className="my-2 md:my-4 text-body2Normal">
+              {data?.pollContent}
+            </div>
+          )}
           <div className="flex items-center text-slate-600">
             <button
               onClick={(e) => {
@@ -243,7 +269,20 @@ export const Feed: FC<FeedProps> = ({
             <div className="text-sm">{data?.commentCount}</div>
           </div>
         </div>
+        {user?.id === data?.user.userId && (
+          <Dropdown
+            handleClickDelete={handleClickDelete}
+            hadleClickEdit={() => {
+              setIsOpenDrawer(true);
+            }}
+          />
+        )}
       </div>
+      <FeedEditDrawer
+        isOpen={isOpenDrawer}
+        setIsOpen={setIsOpenDrawer}
+        data={data}
+      />
       <Modal>
         <LoginModalContent />
       </Modal>

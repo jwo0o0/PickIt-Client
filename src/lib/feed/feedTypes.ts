@@ -28,3 +28,8 @@ export interface FeedListType {
   hasNextPage: boolean;
   feeds: FeedType[];
 }
+
+export interface PatchFeedResponse {
+  feedId: number;
+  message: string;
+}
