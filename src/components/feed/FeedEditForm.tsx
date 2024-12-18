@@ -16,21 +16,22 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "../ui/textarea";
 import { FeedFormImages } from "./FeedFormImages";
+import { usePatchFeed } from "@/lib/feed/hooks/usePatchFeed";
 
 interface FeedEditFormProps {
-  data: FeedType | undefined;
+  data: FeedType;
+  setIsOpen: (open: boolean) => void;
 }
-export const FeedEditForm = ({ data }: FeedEditFormProps) => {
-  console.log(data);
+export const FeedEditForm = ({ data, setIsOpen }: FeedEditFormProps) => {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FeedEditPayload>({
     resolver: zodResolver(feedEditSchema),
     defaultValues: {
-      content: data?.content || "",
-      pollContent: data?.pollContent || "",
-      images: data?.images || [],
+      content: data.content || "",
+      pollContent: data.pollContent || "",
+      images: data.images || [],
     },
   });
 
@@ -43,9 +44,23 @@ export const FeedEditForm = ({ data }: FeedEditFormProps) => {
   const content = watch("content");
   const pollContent = watch("pollContent");
 
+  const { mutate: patchFeedMutation } = usePatchFeed();
+
   const onSubmit = (values: FeedEditPayload) => {
-    console.log(values.images);
-    router.push(`/feed/${data?.feedId}`);
+    patchFeedMutation(
+      { feedId: data.feedId, ...values },
+      {
+        onSuccess: () => {
+          setIsOpen(false);
+          router.refresh();
+        },
+        onError: () => {
+          setIsOpen(false);
+          router.refresh();
+          alert("피드 수정에 실패했습니다.");
+        },
+      }
+    );
   };
 
   const handleClickImageButton = () => {
