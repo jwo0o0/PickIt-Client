@@ -23,7 +23,7 @@ import getImageName from "@/utils/format/getImageName";
 
 export interface FeedProps {
   feedId: number;
-  data: FeedType | undefined;
+  data: FeedType;
   handleVoteSuccess?: () => Promise<void>;
   handleLikeSuccess?: () => Promise<void>;
 }
@@ -103,7 +103,7 @@ export const Feed: FC<FeedProps> = ({
       },
       {
         onSuccess: () => {
-          router.back();
+          router.replace("/");
         },
       }
     );
@@ -279,7 +279,7 @@ export const Feed: FC<FeedProps> = ({
             />
             <FeedEditDrawer
               isOpen={isOpenDrawer}
-              setOpen={setIsOpenDrawer}
+              setIsOpen={setIsOpenDrawer}
               data={data}
             />
           </>
