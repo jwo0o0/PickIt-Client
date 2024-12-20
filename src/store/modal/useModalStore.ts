@@ -1,12 +1,14 @@
 import { create } from "zustand";
 
 interface ModalStore {
+  content: React.ReactNode | null;
   isOpen: boolean;
-  open: () => void;
+  open: (content: React.ReactNode) => void;
   close: () => void;
 }
 export const useModalStore = create<ModalStore>((set) => ({
+  content: null,
   isOpen: false,
-  open: () => set({ isOpen: true }),
+  open: (content) => set({ isOpen: true, content }),
   close: () => set({ isOpen: false }),
 }));
