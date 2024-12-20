@@ -1,13 +1,10 @@
+"use client";
 import { useRef, useEffect, MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { useModalStore } from "@/store/modal/useModalStore";
 
-interface ModalProps {
-  children?: React.ReactNode;
-}
-export const Modal = ({ children }: ModalProps) => {
-  const isOpen = useModalStore((state) => state.isOpen);
-  const close = useModalStore((state) => state.close);
+export const Modal = () => {
+  const { content, isOpen, close } = useModalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +32,7 @@ export const Modal = ({ children }: ModalProps) => {
       onClick={handleClickOutside}
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
-      {children}
+      <div onClick={(e) => e.stopPropagation()}>{content}</div>
     </div>,
     document.body
   );

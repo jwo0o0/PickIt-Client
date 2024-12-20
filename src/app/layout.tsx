@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./global.css";
 import Providers from "@/utils/query/provider";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { Modal } from "@/components/common/modal";
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <MainLayout>{children}</MainLayout>
+          <Modal />
         </Providers>
       </body>
     </html>
