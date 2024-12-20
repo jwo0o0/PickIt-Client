@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProfileImage } from "@/components/common/ProfileImage";
-import { Modal, LoginModalContent } from "../common/modal";
+import { LoginModalContent } from "../common/modal";
 import Dropdown from "@/components/common/Dropdown";
 import { FeedEditDrawer } from "@/components/feed/FeedEditDrawer";
 
@@ -52,7 +52,7 @@ export const Feed: FC<FeedProps> = ({
 
   const handleClickVote = async (item: number) => {
     if (!isLogin && !isLoading) {
-      openModal();
+      openModal(<LoginModalContent />);
     } else {
       voteFeedMutation(
         { feedId, pollItem: item },
@@ -75,7 +75,7 @@ export const Feed: FC<FeedProps> = ({
 
   const handleClickLike = async () => {
     if (!isLogin && !isLoading) {
-      openModal();
+      openModal(<LoginModalContent />);
     } else {
       likeFeedMutation(
         { feedId },
@@ -283,9 +283,6 @@ export const Feed: FC<FeedProps> = ({
         setIsOpen={setIsOpenDrawer}
         data={data}
       />
-      <Modal>
-        <LoginModalContent />
-      </Modal>
     </>
   );
 };
